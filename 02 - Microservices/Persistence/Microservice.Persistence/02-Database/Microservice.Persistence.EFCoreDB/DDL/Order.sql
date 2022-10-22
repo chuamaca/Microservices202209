@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Order]
+(
+	OrderId INT NOT NULL IDENTITY PRIMARY KEY,
+	[Description] VARCHAR(250)
+)
