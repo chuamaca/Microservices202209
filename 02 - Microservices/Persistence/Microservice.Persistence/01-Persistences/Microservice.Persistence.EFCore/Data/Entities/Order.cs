@@ -13,6 +13,7 @@ namespace Microservice.Persistence.EFCore.Data.Entities
 
         public int OrderId { get; set; }
         public string Description { get; set; }
+        public decimal Amount { get; set; }
 
         public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
