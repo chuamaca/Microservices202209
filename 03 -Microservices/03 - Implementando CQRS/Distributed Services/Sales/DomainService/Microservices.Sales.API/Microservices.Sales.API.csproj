@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Infrastructure\Microservices.Infrastructure\Microservices.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Products\ReadModelService\Microservices.Products.ReadModels.Client\Microservices.Products.ReadModels.Client.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Microservices.Sales.Infrastructure\Microservices.Sales.Infrastructure.csproj" />
+  </ItemGroup>
+
+
+</Project>

@@ -1,0 +1,37 @@
+﻿@model Microservice.CQRS.Premium.Client.ViewModels.LiveViewModel
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+
+<div id="listOfMatches">
+    @Html.Partial("_live")
+</div>
+
+@section Scripts {
+    <!-- Code to update the page -->
+    <script>
+        $(function () {
+            // Reference the auto-generated proxy for the hub.
+
+            var connection = new signalR.HubConnectionBuilder().withUrl("/LiveScoreHub").build();
+
+            connection.on("RefreshPage", function () {
+                $.ajax({
+                    url: "/live/update",
+                    cache: false,
+                    dataType: "html",
+                    success: function (data) {
+                        $("#listOfMatches").html(data);
+                    }
+                });
+            });
+
+            connection.start().then(function () {
+
+            }).catch(function (err) {
+                return console.error(err.toString());
+            });
+        });
+    </script>
+}
+
+

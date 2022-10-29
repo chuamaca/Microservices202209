@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 ////////////////////////////////// EF CORE ////////////////////////////////////////////////////
 string conn = builder.Configuration.GetConnectionString("Microservice.Persistence.EFCoreDB");
 //string conn = Configuration.GetConnectionString("Microservice.Persistence.EFCoreDB.azure");
-builder.Services.AddDbContext<MicroservicePersistenceEFcoreContext>(opt => { opt.UseSqlServer(conn); });
+builder.Services.AddDbContext<MicroservicePersistenceEFcoreContext>(opt => { opt.UseSqlServer(conn).LogTo(Console.WriteLine); });
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 ////////////////////////////////// MONGODB ////////////////////////////////////////////////////

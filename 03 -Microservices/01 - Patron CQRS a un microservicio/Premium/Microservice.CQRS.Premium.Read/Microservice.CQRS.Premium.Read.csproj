@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microservice.CQRS.Premium.Infrastructure\Microservice.CQRS.Premium.Infrastructure.csproj" />
+    <ProjectReference Include="..\Microservice.CQRS.Premium.Shared\Microservice.CQRS.Premium.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,30 @@
+﻿{
+   "ContextClassName": "MerloContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "DoNotCombineNamespace": false,
+   "IdReplace": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Data\/Context",
+   "OutputPath": "Data\/Entities",
+   "ProjectRootNamespace": "Microservice.CQRS.Deluxe.Infrastructure.Persistence.SqlServer",
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Bookings]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[dbo].[Courts]"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseSpatial": false
+}

@@ -1,0 +1,13 @@
+1.- Regular
+	- Regenearte DB
+	- Click in Add
+
+2.- Premium
+	- Regenearte DB
+	- Into to link /Admin, click reset button
+	- Select a Match
+	- Open in other browser /Live
+
+3.- Deluxe
+	
+	

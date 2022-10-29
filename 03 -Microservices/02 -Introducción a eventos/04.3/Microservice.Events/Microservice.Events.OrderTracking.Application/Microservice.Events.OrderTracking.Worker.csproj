@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Topshelf.Autofac" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Microservice.Events.MessageSubscriber\Microservice.Events.MessageSubscriber.csproj" />
+    <ProjectReference Include="..\Microservice.Events.OrderTracking.Domain\Microservice.Events.OrderTracking.Application.csproj" />
+  </ItemGroup>
+
+</Project>
