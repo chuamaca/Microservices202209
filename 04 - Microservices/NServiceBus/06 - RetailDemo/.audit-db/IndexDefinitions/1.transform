@@ -1,0 +1,8 @@
+{
+  "TransformResults": "from message in results\nselect new {\n\tmessage = message,\n\tmetadata = message.MessageMetadata\n} into this0\nselect new {\n\tMessageId = this0.metadata[\"MessageId\"],\n\tBody = !String.IsNullOrEmpty(this0.message.Body) ? this0.message.Body : this0.metadata[\"Body\"],\n\tBodySize = ((int)this0.metadata[\"ContentLength\"]),\n\tContentType = this0.metadata[\"ContentType\"],\n\tBodyNotStored = ((bool)this0.metadata[\"BodyNotStored\"])\n}",
+  "TransfomerId": 1,
+  "Temporary": false,
+  "Name": "MessagesBodyTransformer",
+  "LockMode": "Unlock",
+  "TransformerVersion": 1
+}

@@ -1,0 +1,1 @@
+2022-11-12 16:04:01.1014|7|Warn|Raven.Client.Connection.Async.AsyncServerClient|Was unable to fetch topology from primary node http://localhost also there is no cached topology

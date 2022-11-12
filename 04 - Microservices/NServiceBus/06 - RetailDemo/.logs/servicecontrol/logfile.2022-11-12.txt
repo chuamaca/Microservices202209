@@ -1,0 +1,53 @@
+2022-11-12 15:59:13.7105|1|Info|ServiceBus.Management.Infrastructure.Settings.Settings|No settings found for error log queue to import, default name will be used
+2022-11-12 15:59:13.9874|1|Info|Particular.ServiceControl.Bootstrapper|
+-------------------------------------------------------------
+ServiceControl Version:             4.25.2+536242d40da312846d204e68975ecc9826ea4f1b
+Audit Retention Period (optional):  
+Error Retention Period:             10.00:00:00
+Ingest Error Messages:              True
+Forwarding Error Messages:          False
+Database Size:                      -1 B
+Database Folder Size:                b
+ServiceControl Logging Level:       Info
+RavenDB Logging Level:              Warn
+Selected Transport Customization:   ServiceControl.Transports.Learning.LearningTransportCustomization, ServiceControl.Transports.Learning
+-------------------------------------------------------------
+2022-11-12 15:59:14.3768|1|Info|ServiceControl.Infrastructure.RavenDB.RavenBootstrapper|Loading Embedded RavenDB license
+2022-11-12 15:59:26.7299|69|Warn|NServiceBus.TransportExtensions|A connection string named 'NServiceBus/Transport' was found. Using named connection strings is discouraged. Instead, load the connection string in your code and pass the value to EndpointConfiguration.UseTransport().ConnectionString(connectionString).
+2022-11-12 15:59:26.7405|69|Info|ServiceControl.Infrastructure.RavenDB.EmbeddedRavenDbHostedService|Initializing RavenDB instance
+2022-11-12 15:59:26.7405|69|Info|ServiceControl.Infrastructure.RavenDB.EmbeddedRavenDbHostedService|Creating indexes if not present.
+2022-11-12 15:59:26.7405|69|Info|ServiceControl.Infrastructure.RavenDB.EmbeddedRavenDbHostedService|Testing indexes
+2022-11-12 15:59:26.7405|69|Info|ServiceControl.Infrastructure.RavenDB.EmbeddedRavenDbHostedService|Executing data migrations
+2022-11-12 15:59:26.7405|69|Info|ServiceControl.Infrastructure.RavenDB.Expiration.ExpiredDocumentsCleanerBundle|Running deletion of expired documents every 600 seconds
+2022-11-12 15:59:26.7405|69|Info|ServiceControl.Infrastructure.RavenDB.Expiration.ExpiredDocumentsCleanerBundle|Deletion batch size set to 65512
+2022-11-12 15:59:26.7405|69|Info|ServiceControl.Infrastructure.RavenDB.Expiration.ExpiredDocumentsCleanerBundle|Retention period for errors is 10.00:00:00
+2022-11-12 15:59:27.0684|65|Warn|NServiceBus.TransportExtensions|A connection string named 'NServiceBus/Transport' was found. Using named connection strings is discouraged. Instead, load the connection string in your code and pass the value to EndpointConfiguration.UseTransport().ConnectionString(connectionString).
+2022-11-12 15:59:27.1937|60|Warn|NServiceBus.TransportExtensions|A connection string named 'NServiceBus/Transport' was found. Using named connection strings is discouraged. Instead, load the connection string in your code and pass the value to EndpointConfiguration.UseTransport().ConnectionString(connectionString).
+2022-11-12 15:59:27.2243|68|Info|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2022-11-12 15:59:27.2243|68|Info|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2022-11-12 15:59:27.2243|68|Info|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Microservices202209\04 - Microservices\NServiceBus\06 - RetailDemo\PlatformTools\bin\Debug\net6.0\platform\servicecontrol\servicecontrol-instance\
+2022-11-12 15:59:27.2416|71|Info|ServiceControl.Recoverability.RetryDocumentManager|Found 0 orphaned retry batches from previous sessions.
+2022-11-12 15:59:27.2711|59|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to forward.
+2022-11-12 15:59:27.2711|8|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.2711|70|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.2711|5|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.2868|67|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.3024|6|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.4350|70|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.4350|8|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.4350|63|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.4434|4|Info|ServiceControl.Notifications.Email.SendEmailNotificationHandler|Skipping email sending. Notifications turned-off.
+2022-11-12 15:59:27.4434|62|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to stage.
+2022-11-12 15:59:57.4588|10|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to forward.
+2022-11-12 15:59:57.4588|115|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to stage.
+2022-11-12 16:00:27.4744|115|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to forward.
+2022-11-12 16:00:27.4744|66|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to stage.
+2022-11-12 16:00:57.4856|116|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to forward.
+2022-11-12 16:00:57.4913|68|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to stage.
+2022-11-12 16:01:27.2574|69|Info|ServiceControl.Recoverability.RetryDocumentManager|Found 0 orphaned retry batches from previous sessions.
+2022-11-12 16:01:27.4910|72|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to forward.
+2022-11-12 16:01:27.5066|116|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to stage.
+2022-11-12 16:01:57.5119|60|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to forward.
+2022-11-12 16:01:57.5119|106|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to stage.
+2022-11-12 16:02:27.5055|103|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to forward.
+2022-11-12 16:02:27.5055|108|Info|ServiceControl.Recoverability.RetryProcessor|No batch found to stage.

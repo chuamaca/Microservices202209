@@ -1,0 +1,29 @@
+2022-11-12 15:59:14.0556|1|Info|ServiceControl.Audit.Infrastructure.Settings.Settings|No settings found for audit log queue to import, default name will be used
+2022-11-12 15:59:14.3360|1|Info|ServiceControl.Audit.Infrastructure.Bootstrapper|
+-------------------------------------------------------------
+ServiceControl Audit Version:       4.25.2+536242d40da312846d204e68975ecc9826ea4f1b
+Audit Retention Period:             10.00:00:00
+Forwarding Audit Messages:          False
+Database Size:                       b
+Database Folder Size:                b
+ServiceControl Logging Level:       Info
+RavenDB Logging Level:              Warn
+Selected Transport Customization:   ServiceControl.Transports.Learning.LearningTransportCustomization, ServiceControl.Transports.Learning
+-------------------------------------------------------------
+2022-11-12 15:59:22.2579|5|Info|ServiceControl.Audit.Persistence.RavenDB.RavenBootstrapper|Loading Embedded RavenDB license
+2022-11-12 15:59:22.2755|5|Warn|NServiceBus.TransportExtensions|A connection string named 'NServiceBus/Transport' was found. Using named connection strings is discouraged. Instead, load the connection string in your code and pass the value to EndpointConfiguration.UseTransport().ConnectionString(connectionString).
+2022-11-12 15:59:22.2755|5|Info|ServiceControl.Audit.Persistence.RavenDB.EmbeddedRavenDbHostedService|Database initialization starting
+2022-11-12 15:59:22.2755|5|Info|ServiceControl.Audit.Persistence.RavenDB.EmbeddedRavenDbHostedService|Database initialization complete
+2022-11-12 15:59:22.2871|5|Info|ServiceControl.Audit.Persistence.RavenDB.EmbeddedRavenDbHostedService|Index creation started
+2022-11-12 15:59:22.2871|5|Info|ServiceControl.Audit.Persistence.RavenDB.EmbeddedRavenDbHostedService|Index creation complete
+2022-11-12 15:59:22.2871|5|Info|ServiceControl.Audit.Persistence.RavenDB.EmbeddedRavenDbHostedService|Data migrations starting
+2022-11-12 15:59:22.2871|5|Info|ServiceControl.Audit.Persistence.RavenDB.EmbeddedRavenDbHostedService|Data migrations complete
+2022-11-12 15:59:22.2871|5|Info|ServiceControl.Audit.Persistence.RavenDB.Expiration.ExpiredDocumentsCleanerBundle|Running deletion of expired documents every 600 seconds
+2022-11-12 15:59:22.2871|5|Info|ServiceControl.Audit.Persistence.RavenDB.Expiration.ExpiredDocumentsCleanerBundle|Deletion batch size set to 65512
+2022-11-12 15:59:22.2871|5|Info|ServiceControl.Audit.Persistence.RavenDB.Expiration.ExpiredDocumentsCleanerBundle|Retention period for audits and saga history is 10.00:00:00
+2022-11-12 15:59:22.4309|9|Info|ServiceControl.Audit.Auditing.AuditIngestion|Ensure started. Infrastructure starting
+2022-11-12 15:59:22.4439|9|Warn|NServiceBus.TransportExtensions|A connection string named 'NServiceBus/Transport' was found. Using named connection strings is discouraged. Instead, load the connection string in your code and pass the value to EndpointConfiguration.UseTransport().ConnectionString(connectionString).
+2022-11-12 15:59:22.4732|9|Info|ServiceControl.Audit.Auditing.AuditIngestion|Ensure started. Infrastructure started
+2022-11-12 15:59:22.4785|69|Info|Microsoft.Hosting.Lifetime|Application started. Press Ctrl+C to shut down.
+2022-11-12 15:59:22.4785|69|Info|Microsoft.Hosting.Lifetime|Hosting environment: Production
+2022-11-12 15:59:22.4785|69|Info|Microsoft.Hosting.Lifetime|Content root path: D:\GitHub\Microservices202209\04 - Microservices\NServiceBus\06 - RetailDemo\PlatformTools\bin\Debug\net6.0\platform\servicecontrol\servicecontrol-audit-instance\

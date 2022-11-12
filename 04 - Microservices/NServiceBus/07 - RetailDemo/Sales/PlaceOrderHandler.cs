@@ -21,7 +21,7 @@ namespace Sales
             // This is normally where some business logic would occur
 
             // Uncomment to test throwing a systemic exception
-            //throw new Exception("BOOM");
+            throw new Exception("BOOM");
 
             var orderPlaced = new OrderPlaced
             {

@@ -1,0 +1,11 @@
+2022-11-12 15:46:55.7158|8|Warn|Raven.Client.Connection.Async.AsyncServerClient|Was unable to fetch topology from primary node http://localhost also there is no cached topology
+2022-11-12 15:48:31.8395|6|Warn|Raven.Database.Indexing.IndexStorage.Startup|Could not open index ExpiryKnownEndpointsIndex. Recovery operation failed, forcibly resetting index
+System.InvalidOperationException: Index directory 'D:\GitHub\Microservices202209\04 - Microservices\NServiceBus\05 - RetailDemo\.audit-db\Indexes\1' does not exists for 'ExpiryKnownEndpointsIndex' index.
+   at Raven.Database.Indexing.IndexStorage.OpenOrCreateLuceneDirectory(IndexDefinition indexDefinition, Boolean createIfMissing, Boolean forceFullExistingIndexCheck)
+   at Raven.Database.Indexing.IndexStorage.OpenIndex(String indexName, Boolean onStartup, Boolean forceFullIndexCheck)
+2022-11-12 15:48:33.5568|7|Warn|Raven.Client.Connection.Async.AsyncServerClient|Was unable to fetch topology from primary node http://localhost also there is no cached topology
+2022-11-12 15:50:30.5765|7|Warn|Raven.Database.Indexing.IndexStorage.Startup|Could not open index ExpiryKnownEndpointsIndex. Recovery operation failed, forcibly resetting index
+System.InvalidOperationException: Index directory 'D:\GitHub\Microservices202209\04 - Microservices\NServiceBus\05 - RetailDemo\.audit-db\Indexes\7' does not exists for 'ExpiryKnownEndpointsIndex' index.
+   at Raven.Database.Indexing.IndexStorage.OpenOrCreateLuceneDirectory(IndexDefinition indexDefinition, Boolean createIfMissing, Boolean forceFullExistingIndexCheck)
+   at Raven.Database.Indexing.IndexStorage.OpenIndex(String indexName, Boolean onStartup, Boolean forceFullIndexCheck)
+2022-11-12 15:50:32.0390|57|Warn|Raven.Client.Connection.Async.AsyncServerClient|Was unable to fetch topology from primary node http://localhost also there is no cached topology

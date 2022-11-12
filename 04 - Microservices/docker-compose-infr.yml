@@ -59,8 +59,8 @@ services:
       - 5671:5671
       - 25672:25672
     environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest    
+      - RABBITMQ_DEFAULT_USER=test
+      - RABBITMQ_DEFAULT_PASS=test
     networks:
       - backend
 ########################################################## networks #######################################################################################################

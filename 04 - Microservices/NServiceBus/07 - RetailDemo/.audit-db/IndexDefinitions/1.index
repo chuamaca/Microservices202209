@@ -1,0 +1,30 @@
+{
+  "IndexId": 1,
+  "Name": "ExpiryKnownEndpointsIndex",
+  "LockMode": "Unlock",
+  "IndexVersion": 1,
+  "Map": "from knownEndpoint in docs.KnownEndpoints\nselect new {\n\tLastSeen = knownEndpoint.LastSeen.Ticks\n}",
+  "Maps": [
+    "from knownEndpoint in docs.KnownEndpoints\nselect new {\n\tLastSeen = knownEndpoint.LastSeen.Ticks\n}"
+  ],
+  "Reduce": null,
+  "IsMapReduce": false,
+  "IsCompiled": false,
+  "Stores": {},
+  "Indexes": {},
+  "SortOptions": {
+    "LastSeen": "Long"
+  },
+  "Analyzers": {},
+  "Fields": [],
+  "Suggestions": null,
+  "SuggestionsOptions": [],
+  "TermVectors": {},
+  "SpatialIndexes": {},
+  "InternalFieldsMapping": {},
+  "MaxIndexOutputsPerDocument": null,
+  "Type": "Map",
+  "DisableInMemoryIndexing": false,
+  "IsTestIndex": false,
+  "IsSideBySideIndex": false
+}
