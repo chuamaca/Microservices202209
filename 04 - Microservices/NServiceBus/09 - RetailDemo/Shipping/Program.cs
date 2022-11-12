@@ -17,7 +17,7 @@ namespace Shipping
             //var transport = endpointConfiguration.UseTransport<LearningTransport>();
             //var persistence = endpointConfiguration.UsePersistence<LearningPersistence>();
 
-            var connection = @"Data Source=PE-LPALQ00769\MSSQLSERVER2019; Initial Catalog=NServiceBusSaga;User ID=sa;Password=Password1234;";
+            var connection = @"Data Source=.; Initial Catalog=NServiceBusSaga;User ID=sa;Password=Password1234;";
             var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
             var subscriptions = persistence.SubscriptionSettings();
             subscriptions.CacheFor(TimeSpan.FromMinutes(1));
@@ -31,8 +31,8 @@ namespace Shipping
 
             var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
             transport.ConnectionString("host=localhost;username=test;password=test");
-            transport.UsePublisherConfirms(true);
-            transport.UseDirectRoutingTopology();
+            //transport.UsePublisherConfirms(true);
+            transport.UseDirectRoutingTopology(QueueType.Quorum);
 
             endpointConfiguration.EnableInstallers();
             var endpointInstance = await Endpoint.Start(endpointConfiguration)

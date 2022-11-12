@@ -17,8 +17,8 @@ namespace Shipping
 
             var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
             transport.ConnectionString("host=localhost;username=test;password=test");
-            transport.UsePublisherConfirms(true);
-            transport.UseConventionalRoutingTopology();
+            //transport.UsePublisherConfirms(true);            
+            transport.UseConventionalRoutingTopology(QueueType.Quorum);
 
             endpointConfiguration.EnableInstallers();
             var endpointInstance = await Endpoint.Start(endpointConfiguration)

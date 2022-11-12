@@ -1,15 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="7.2.2" />
+    <PackageReference Include="NServiceBus" Version="7.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Messages\Commands.csproj" />
+    <ProjectReference Include="..\Commands\Commands.csproj" />
   </ItemGroup>
 
 </Project>

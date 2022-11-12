@@ -14,8 +14,14 @@ namespace Shipping.TimeOutSample
     {
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<MySagaData> mapper)
         {
-            mapper.ConfigureMapping<Message2>(message => message.SomeId)
-                .ToSaga(sagaData => sagaData.SomeId);
+            mapper.MapSaga(saga => saga.SomeId)
+                .ToMessage<Message2>(message => message.SomeId)
+                .ToMessage<Message1>(msg => msg.SomeId);
+
+
+            //mapper.ConfigureMapping<Message2>(message => message.SomeId)
+            //    .ToSaga(sagaData => sagaData.SomeId);
+
         }
 
         public Task Handle(Message1 message, IMessageHandlerContext context)

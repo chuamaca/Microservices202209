@@ -16,8 +16,8 @@ namespace Billing
 
             var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
             transport.ConnectionString("host=localhost;username=test;password=test");
-            transport.UsePublisherConfirms(true);
-            transport.UseDirectRoutingTopology();
+            //transport.UsePublisherConfirms(true);
+            transport.UseDirectRoutingTopology(QueueType.Quorum);
 
             endpointConfiguration.EnableInstallers();
             var endpointInstance = await Endpoint.Start(endpointConfiguration)

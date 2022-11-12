@@ -15,7 +15,7 @@ class Program
 
         #region sqlServerConfig
 
-        var connection = @"Data Source=PE-LPALQ00769\MSSQLSERVER2019; Initial Catalog=NServiceBusSaga;User ID=sa;Password=Password1234;";
+        var connection = @"Data Source=.; Initial Catalog=NServiceBusSaga;User ID=sa;Password=Password1234;TrustServerCertificate=True";
         var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
         persistence.SqlDialect<SqlDialect.MsSqlServer>();
         persistence.ConnectionBuilder(

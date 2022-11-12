@@ -24,8 +24,8 @@ namespace ClientUI
             */
             var transport = endpointConfiguration.UseTransport<RabbitMQTransport>();
             transport.ConnectionString("host=localhost;username=test;password=test");
-            transport.UsePublisherConfirms(true);
-            transport.UseDirectRoutingTopology();
+            //transport.UsePublisherConfirms(true);
+            transport.UseDirectRoutingTopology(QueueType.Quorum);
 
             var routing = transport.Routing();
             routing.RouteToEndpoint(typeof(PlaceOrder), "Rabbit.Sales");
