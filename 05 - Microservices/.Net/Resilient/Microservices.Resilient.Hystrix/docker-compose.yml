@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  microservices.resilient.hystrix.api:
+    container_name: microservices.resilient.hystrix.api
+    image: microservices.resilient.hystrix.api
+    build:
+      context: .
+      dockerfile: Microservices.Resilient.Hystrix.API/Dockerfile
+    ports:
+      - 7826:80
+      - 7827:443
+    networks:
+      - backend  
+  microservices.resilient.hystrix.client.mvc:
+    container_name: microservices.resilient.hystrix.client.mvc
+    image: ${DOCKER_REGISTRY-}microservicesresilienthystrixclientmvc
+    build:
+      context: .
+      dockerfile: Microservices.Resilient.Hystrix.Client.MVC/Dockerfile
+    ports:
+      - 10453:80
+      - 44351:443
+    networks:
+      - backend
+  microservices.resilient.hystrix.dashboard:
+    container_name: microservices.resilient.hystrix.dashboard
+    image: microservices.resilient.hystrix.dashboard
+    build:
+      context: Microservices.Resilient.Hystrix.Dashboard
+      dockerfile: Dockerfile
+    ports:
+      - 7979:7979
+    networks:
+      - backend
+networks:
+  backend:
+    name: backend
+    driver: bridge

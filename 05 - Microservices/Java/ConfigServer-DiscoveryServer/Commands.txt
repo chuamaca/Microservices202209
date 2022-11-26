@@ -1,0 +1,162 @@
+Parte 01
+=============================================================================================================================================================
+Instalar plugin de java para VSCode
+https://code.visualstudio.com/docs/languages/java
+https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack
+
+Instalar las extensiones de spring boot
+
+Instalar Maven
+https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip
+Descragar, descomprimir, copiar a la raiz y agregar el bin al path de windows
+
+
+
+SERVICES DISCOVERY
+==================
+
+Generar proyecto de Discovery service
+=====================================
+Ctrl+Shift+p
+Spring Initializr
+Lenguaje : java
+GroupId : io.microservices
+Artifact : discovery-server
+Spring Boot version : 2.2.4
+Dependencies : Eureka Server, DevTools, Actuator, web 
+Renombrar la clase Demo a DiscoveryServerApplication
+Marcar a la clase application con "@EnableEurekaServer"
+
+En resources configurar (deshabilitar alta disponibilidad) el repositorio "application.properties":
+spring.application.name=discovery-server
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+server.port=8761
+
+Ejecutar en debug
+=================
+Ir al spring-boot dashboard, seleccionar la app y dar start
+
+
+SERVICE DEMO
+============
+Ctrl+Shift+p
+Spring Initializr
+Lenguaje : java
+GroupId : io.microservices
+Artifact : service
+Spring Boot version : 2.2.4
+Dependencies : Eureka Discovery, DevTools, Actuator, Web
+Renombrar la clase Demo a ServiceApplication
+Marcar a la clase application con @EnableDiscoveryClient
+
+Utilizar archivos
+cambiar puerto 8081 / 8082
+y nombre de "instancia 1" / "instancia 2"
+Generar binario
+Revisar JAVA_HOME
+Ir a la carpeta del proyecto y ejecutar: mvn install
+Generar paquete con : mvn package
+renombrar (carpeta target) el jar a service01.jar / service02.jar
+Ejecutar  : java -jar service01.jar   /   java -jar service02.jar
+java -jar .\target\service-0.0.1-SNAPSHOT.jar "instancia 1" --server.port=8081
+
+
+CLIENT DEMO
+============
+Ctrl+Shift+p
+Spring Initializr
+Lenguaje : java
+GroupId : io.microservices
+Artifact : client
+Spring Boot version : 2.2.4
+Dependencies : Eureka Discovery, DevTools, Actuator, Web
+Renombrar la clase Demo a ClientApplication
+Marcar a la clase application con @EnableDiscoveryClient
+
+Utilizar archivos
+Iniciar el servidor de Discovery
+iniciar el cliente
+revisar por el puerto 8080
+
+
+mvn spring-boot:run
+
+CONFIG SERVER
+=============
+
+Generar un repositorio GIT donde iran las configuraciones
+https://github.com/Scorpius86/Microservices-Config-Repository
+Clonar el repositorio a la estacion
+
+Generar proyecto de Configserver
+================================
+Ctrl+Shift+p
+Spring Initializr
+Lenguaje : java
+GroupId : io.microservices
+Artifact : config-server
+Spring Boot version : 2.2.4
+Dependencies : Config Server, Eureka Server, Actuator
+Renombrar la clase Demo a ConfigServerApplication
+Marcar a la clase application con "@EnableConfigServer"
+
+En resources configurar el repositorio "application.properties":
+server.port=8888
+spring.cloud.config.server.git.uri=https://github.com/Scorpius86/Microservices-Config-Repository.git
+
+Ejecutar en debug
+=================
+Ir al spring-boot dashboard, seleccionar la app y dar start
+Para validar digitar la url : 
+http://localhost:8888/config-client-app/default
+http://localhost:8888/config-client-app/prod
+http://localhost:8888/config-client-app.properties
+http://localhost:8888/config-client-app.yml
+
+Parte 02
+=============================================================================================================================================================
+
+CLIENT CONFIG DEMO
+==================
+Ctrl+Shift+p
+Spring Initializr
+Lenguaje : java
+GroupId : io.microservices
+Artifact : config-client-app
+Spring Boot version : 2.2.4
+Dependencies (utilizando edit starter) : Eureka Discovery, DevTools, Actuator, Web, config client
+Renombrar la clase Demo a ConfigClientAppApplication
+Marcar a la clase application con @EnableDiscoveryClient , @EnableConfigurationProperties
+
+Utilizar archivos
+
+crear un archivo bootstrap.properties
+spring.application.name=config-client-app
+spring.cloud.config.discovery.enabled=true
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+
+En el proyecto del CONFIG SERVER, al property agregar:
+spring.application.name=configserver
+
+http://localhost:8080/
+
+
+
+Parte 03
+=============================================================================================================================================================
+Actualizar el archivo config-client-app.properties
+agragar a bootstrap : 
+management.endpoints.web.exposure.include=refresh
+agrgar al controler : @RefreshScope
+realizar un llamado usando postman  :  POST http://localhost:8080/actuator/refresh
+
+
+
+
+
+Generar binario
+Revisar JAVA_HOME
+Ir a la carpeta del proyecto y ejecutar: mvn install
+Generar paquete con : mvn package
+Ejecutar (carpeta target) el de terminacion "-SNAPSHOT" : java -jar target/demo-project-0.0.1-SNAPSHOT.jar

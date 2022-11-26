@@ -1,0 +1,20 @@
+﻿@model Microservices.ConfigServer.Client.MVC.Settings.ApplicationSettings
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <pre class="prettyprint text-left">
+        ConnectionStrings : {
+        MicroservicesClientConnectionString : "@Model.ConnectionStrings.MicroservicesClientConnectionString"
+        }
+        JwtSettings : {
+            Key : "@Model.JwtSettings.Key",
+            Issuer : "@Model.JwtSettings.Issuer",
+            Audience : "@Model.JwtSettings.Audience",
+            MinutesToExpiration : "@Model.JwtSettings.MinutesToExpiration"
+        }        
+        </pre>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

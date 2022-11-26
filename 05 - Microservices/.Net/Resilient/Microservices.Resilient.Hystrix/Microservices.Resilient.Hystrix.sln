@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.Resilient.Hystrix.Dashboard", "Microservices.Resilient.Hystrix.Dashboard\Microservices.Resilient.Hystrix.Dashboard.csproj", "{9FBA1A49-9308-4684-AFB9-CD0DF9E09D4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.Resilient.Hystrix.API", "Microservices.Resilient.Hystrix.API\Microservices.Resilient.Hystrix.API.csproj", "{789CF49A-06F0-4484-A1BB-80464BF354E4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4BD5C2FC-5C8B-43A0-988D-43C9D54F066A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.Resilient.Hystrix.Client.MVC", "Microservices.Resilient.Hystrix.Client.MVC\Microservices.Resilient.Hystrix.Client.MVC.csproj", "{1F2184B3-EA2C-4821-BDEF-2BEA32CF5A46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{05F15A7B-B404-465A-B4FC-AE71DADD4C13}"
+	ProjectSection(SolutionItems) = preProject
+		run-hystrix-dashboard.txt = run-hystrix-dashboard.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9FBA1A49-9308-4684-AFB9-CD0DF9E09D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FBA1A49-9308-4684-AFB9-CD0DF9E09D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FBA1A49-9308-4684-AFB9-CD0DF9E09D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FBA1A49-9308-4684-AFB9-CD0DF9E09D4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{789CF49A-06F0-4484-A1BB-80464BF354E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{789CF49A-06F0-4484-A1BB-80464BF354E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{789CF49A-06F0-4484-A1BB-80464BF354E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{789CF49A-06F0-4484-A1BB-80464BF354E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BD5C2FC-5C8B-43A0-988D-43C9D54F066A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BD5C2FC-5C8B-43A0-988D-43C9D54F066A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BD5C2FC-5C8B-43A0-988D-43C9D54F066A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BD5C2FC-5C8B-43A0-988D-43C9D54F066A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F2184B3-EA2C-4821-BDEF-2BEA32CF5A46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F2184B3-EA2C-4821-BDEF-2BEA32CF5A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F2184B3-EA2C-4821-BDEF-2BEA32CF5A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F2184B3-EA2C-4821-BDEF-2BEA32CF5A46}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {84AE9FCD-C420-4FE4-A2B2-02B5C29B2D78}
+	EndGlobalSection
+EndGlobal

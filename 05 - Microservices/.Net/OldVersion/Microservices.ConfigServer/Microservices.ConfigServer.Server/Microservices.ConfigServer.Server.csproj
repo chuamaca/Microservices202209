@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="config-server\.vscode\launch.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="config-server\.mvn\wrapper\maven-wrapper.jar" />
+    <None Include="config-server\.mvn\wrapper\maven-wrapper.properties" />
+    <None Include="config-server\.mvn\wrapper\MavenWrapperDownloader.java" />
+    <None Include="config-server\.settings\org.eclipse.core.resources.prefs" />
+    <None Include="config-server\.settings\org.eclipse.jdt.apt.core.prefs" />
+    <None Include="config-server\.settings\org.eclipse.jdt.core.prefs" />
+    <None Include="config-server\.settings\org.eclipse.m2e.core.prefs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="config-server\src\main\resources\static\" />
+    <Folder Include="config-server\src\main\resources\templates\" />
+    <Folder Include="config-server\target\generated-sources\annotations\" />
+    <Folder Include="config-server\target\generated-test-sources\test-annotations\" />
+  </ItemGroup>
+
+</Project>

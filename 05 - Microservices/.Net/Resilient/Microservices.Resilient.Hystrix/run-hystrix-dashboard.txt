@@ -1,0 +1,5 @@
+docker compose build
+docker compose up
+
+cargar en el stream del dashboard (solo http)
+http://microservices.resilient.hystrix.client.mvc/hystrix/hystrix.stream

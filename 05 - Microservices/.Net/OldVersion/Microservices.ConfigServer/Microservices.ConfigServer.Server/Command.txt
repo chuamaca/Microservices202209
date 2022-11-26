@@ -1,0 +1,5 @@
+﻿cd "D:\OneDrive\Galaxy\Microservices\06 - Microservices\.Net\Microservices.ConfigServer\Microservices.ConfigServer.Server\config-server"
+
+mvn package
+
+java -jar  .\target\config-server-0.0.1-SNAPSHOT.jar

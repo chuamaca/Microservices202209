@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="discovery-server\.vscode\launch.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="discovery-server\.mvn\wrapper\maven-wrapper.jar" />
+    <None Include="discovery-server\.mvn\wrapper\maven-wrapper.properties" />
+    <None Include="discovery-server\.mvn\wrapper\MavenWrapperDownloader.java" />
+    <None Include="discovery-server\.settings\org.eclipse.core.resources.prefs" />
+    <None Include="discovery-server\.settings\org.eclipse.jdt.apt.core.prefs" />
+    <None Include="discovery-server\.settings\org.eclipse.jdt.core.prefs" />
+    <None Include="discovery-server\.settings\org.eclipse.m2e.core.prefs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="discovery-server\src\main\resources\static\" />
+    <Folder Include="discovery-server\src\main\resources\templates\" />
+  </ItemGroup>
+
+</Project>
