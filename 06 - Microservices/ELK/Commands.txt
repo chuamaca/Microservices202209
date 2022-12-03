@@ -1,0 +1,127 @@
+https://www.elastic.co/start
+
+
+Elastic Search y Kibana
+https://www.elastic.co/start
+
+LogStach
+https://www.elastic.co/downloads/logstash
+
+
+Install ElasticSearch
+======================
+
+Manual
+------
+- Descomprimir el ZIP
+- Editar elasticsearch.yml  
+- Editar jvm.options
+-Iniciar
+	.\bin\elasticsearch.bat
+	
+
+Test
+----
+probar el puerto 9200	http://localhost:9200/	
+probar en postma http://localhost:9200/logstach-*/_search
+
+	
+Install LogStach
+================
+
+Enviando un mensaje de logstach a elasticsearch y mostrando en consola
+PS C:\logstash-7.9.1> .\bin\logstash.bat -f .\config\logstash-sample.conf
+
+POST http://localhost:5044/ 
+Body (JSON) : 
+{
+    "logstash":"logstash-2021.01.23-000003"    
+}
+
+
+
+Enviando un mensaje de logstach a elasticsearch
+Configurar para envio http
+PS C:\logstash-7.9.1> .\bin\logstash.bat -f .\config\logstash-http.conf
+
+POST http://localhost:5043/ 
+Body (JSON) : 
+{   
+    "data":"logstash-2021.01.23-000009" 
+}
+
+
+Install Kibana
+==============
+
+CD c:\kibana-7.9.1-windows-x86_64
+.\bin\kibana.bat
+
+ir a http://localhost:5601/
+
+
+Inicializar kibana con datos de ejemplo del log
+Crear un nuevo patron  logstash-*
+
+
+Install Winlogbeat
+==================
+
+https://www.elastic.co/downloads/beats/winlogbeat
+configurar yml
+probar
+.\winlogbeat.exe test config -c .\winlogbeat.yml -e
+configurar
+.\winlogbeat.exe setup -e
+Instalar servicios
+.\install-service-winlogbeat.ps1
+inicar servicio
+Start-Service winlogbeat
+
+
+
+Configurar el logstach para beat y reiniciar el servicio de logstash
+.\bin\logstash.bat -f .\config\logstash.conf
+
+
+Generar un nuevo indice en Kibana
+Revisar Discovery
+Seleccionar columans 	@timestamp	host.hostname	message
+filtrar por nombre
+Ir a visualizacion
+Crear in line chart de winlogbeat
+Agregar un bucket X-axis del campo:@timestamp   label:Events
+Agregar un split-chart , Sub-Aggregation: Terms, Field: Computer_name, Label:Host
+Agrgar bal dashboar : Windows Server: events
+
+
+Install Metricbeats
+===================
+https://www.elastic.co/downloads/beats/metricbeat
+Editar configuracion
+configurar
+.\metricbeat.exe setup -e
+
+ejecutar manualmente 
+metricbeat.exe -e -c metricbeat.yml
+
+
+Agregar un panel line chart
+Y-Axis: Average, Flied: memory.actual.used.pct, Label:RAM: %Used
+X-Axis: Date Histogram, Field:Timestamp
+
+
+Install Filebeat
+================
+https://www.elastic.co/downloads/beats/filebeat
+
+Ediatr configuracion
+
+setup
+.\filebeat.exe setup -e
+
+ejecucion manual
+filebeat -e -c filebeat.yml
+
+INSTALL APM
+==========

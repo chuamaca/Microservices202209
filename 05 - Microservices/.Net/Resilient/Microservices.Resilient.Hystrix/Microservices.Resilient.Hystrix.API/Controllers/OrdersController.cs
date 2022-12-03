@@ -25,11 +25,13 @@ namespace Microservices.Resilient.Hystrix.API.Controllers
         [HttpGet]
         public IEnumerable<Order> Get()
         {
+            RandomException();
             return _orderRepository.List();
         }
         [HttpGet("{OrderId}")]
         public Order Get(int orderId)
-        {            
+        {
+            RandomException();
             return _orderRepository.Get(orderId);
         }
 

@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+######################################################################### elastic search ##################################################################################
+#docker run docker.elastic.co/beats/metricbeat:6.3.2 --network=awesome-name setup -E setup.kibana.host=kibana:5601 -E output.elasticsearch.hosts=["elasticsearch:9200"]
+#docker run docker.elastic.co/beats/metricbeat:7.13.1 setup -E setup.kibana.host=kibana:5601 -E output.elasticsearch.hosts=["elasticsearch:9200"]
+  metricbeat:    
+    image: docker.elastic.co/beats/metricbeat:7.13.1
+    environment:
+      - setup.kibana.host=kib01-test:5601
+      - output.elasticsearch.hosts=["es01-test:9200"]
+    volumes:
+      - ./metricbeat/data:/usr/share/metricbeat/data
+    networks:
+      - backend
+########################################################## networks #######################################################################################################
+networks:
+  backend:
+    name: backend
+    driver: bridge

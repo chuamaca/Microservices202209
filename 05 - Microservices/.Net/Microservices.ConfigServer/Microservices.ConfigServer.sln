@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.ConfigServer.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.ConfigServer.Eureka", "Microservices.ConfigServer.Eureka\Microservices.ConfigServer.Eureka.csproj", "{C981EB1F-CCC8-421F-BBC3-BB9A7C769602}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microservices.ConfigServer.Client.MVC.Net5", "Microservices.ConfigServer.Client.MVC.Net5\Microservices.ConfigServer.Client.MVC.Net5.csproj", "{E9104C4C-022B-4FEE-B5A8-30C914C61A67}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1F420C2F-98EB-4796-97C3-AFCAECA0B026}"
+	ProjectSection(SolutionItems) = preProject
+		Docker-Compose.yaml = Docker-Compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +32,6 @@ Global
 		{C981EB1F-CCC8-421F-BBC3-BB9A7C769602}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C981EB1F-CCC8-421F-BBC3-BB9A7C769602}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C981EB1F-CCC8-421F-BBC3-BB9A7C769602}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E9104C4C-022B-4FEE-B5A8-30C914C61A67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E9104C4C-022B-4FEE-B5A8-30C914C61A67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E9104C4C-022B-4FEE-B5A8-30C914C61A67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E9104C4C-022B-4FEE-B5A8-30C914C61A67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

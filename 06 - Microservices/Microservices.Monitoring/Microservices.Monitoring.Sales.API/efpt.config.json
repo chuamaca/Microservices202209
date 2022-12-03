@@ -1,0 +1,61 @@
+﻿{
+   "ContextClassName": "MicroservicesMonitoringContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Infrastructure\\Data\\Contexts",
+   "OutputPath": "Infrastructure\\Data\\Entities",
+   "ProjectRootNamespace": "Microservices.Monitoring.Sales.API",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Products].[Brand]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Products].[Category]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Products].[Product]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Products].[Stock]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Sales].[Customer]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Sales].[Order]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Sales].[OrderItem]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Sales].[Staff]"
+      },
+      {
+         "HasPrimaryKey": true,
+         "Name": "[Sales].[Store]"
+      }
+   ],
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseNodaTime": false,
+   "UseSpatial": false,
+   "UseStoredProcedures": false
+}

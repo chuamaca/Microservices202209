@@ -14,12 +14,12 @@ namespace Microservices.Resilient.Hystrix.Client.MVC.Infrastructure.Agents.Order
 
         public async Task<List<Order>> List()
         {
-            Random rnd = new Random();
-            int number = rnd.Next(1, 13);
-            if (number % 2 == 0)
-            {
-                throw new Exception("error on services");
-            }
+            //Random rnd = new Random();
+            //int number = rnd.Next(1, 13);
+            //if (number % 2 == 0)
+            //{
+            //    throw new Exception("error on services");
+            //}
 
             var Client = GetClient();
             var result = await Client.GetStringAsync(API_URL);
@@ -34,12 +34,12 @@ namespace Microservices.Resilient.Hystrix.Client.MVC.Infrastructure.Agents.Order
         }
         public async Task<Order> Get(int orderId)
         {
-            Random rnd = new Random();
-            int number = rnd.Next(1, 13);
-            if (number % 2 == 0)
-            {
-                throw new Exception("error on services");
-            }
+            //Random rnd = new Random();
+            //int number = rnd.Next(1, 13);
+            //if (number % 2 == 0)
+            //{
+            //    throw new Exception("error on services");
+            //}
 
             var Client = GetClient();
             var result = await Client.GetStringAsync(API_URL + orderId);

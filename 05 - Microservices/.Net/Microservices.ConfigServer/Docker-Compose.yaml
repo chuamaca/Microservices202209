@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:  
+  microservices.configserver.eureka:
+    container_name: microservices.configserver.eureka
+    image: microservices.configserver.eureka
+    build:
+      context: Microservices.ConfigServer.Eureka
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - backend
+  microservices.configserver.server:
+    container_name: microservices.configserver.server
+    image: microservices.configserver.server
+    build:
+      context: Microservices.ConfigServer.Server
+      dockerfile: Dockerfile
+    ports:
+      - 8889:8889
+    networks:
+      - backend
+    depends_on:
+      - microservices.configserver.eureka
+  microservices.configserver.client.mvc:
+    container_name: microservices.configserver.client.mvc
+    image: microservices.configserver.client.mvc
+    build:
+      context: Microservices.ConfigServer.Client.MVC
+      dockerfile: Dockerfile
+    ports:
+      - 8081:80
+    networks:
+      - backend
+    depends_on:
+      - microservices.configserver.server
+    restart: on-failure
+networks:
+  backend:
+    name: backend
+    driver: bridge

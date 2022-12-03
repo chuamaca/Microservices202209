@@ -1,0 +1,22 @@
+https://docs.pivotal.io/pcf-dev/install-windows.html
+
+Descargar CF
+https://cli.run.pivotal.io/stable?release=windows64&source=github-rel
+
+
+prometheus
+prometheus.exe --web.listen-address="0.0.0.0:9091"
+
+telegraf
+https://github.com/influxdata/telegraf/releases
+.\telegraf.exe --config 'D:\telegraf\telegraf.conf'
+
+influxdb
+https://dl.influxdata.com/influxdb/releases/influxdb-1.8.2_windows_amd64.zip
+.\influxd.exe
+http://localhost:8086/
+
+grafana
+https://grafana.com/grafana/download?platform=windows
+.\grafana-server.exe
+http://localhost:8030/
