@@ -7,6 +7,7 @@ services:
     image: docker.elastic.co/logstash/logstash:7.13.1
     ports:
       - 5044:5044
+      - 28080:28080
     volumes:
       - ./logstash/conf.d/:/usr/share/logstash/pipeline/:ro
     networks:
