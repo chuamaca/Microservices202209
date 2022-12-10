@@ -1,0 +1,130 @@
+Install prerequisites
+=====================
+Download and Install Azure CLI
+	https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli
+
+Login into Azure
+	az login
+	
+Create Resource Group
+	az group create --name RG-Microservices --location eastus
+	
+
+Create Azure Container Registry
+===============================
+Create acr
+	az acr create --resource-group RG-Microservices --name acrmicroservicesapigateway --sku Basic
+
+Login ACR
+	az acr login --name acrmicroservicesapigateway
+	
+
+Build Docker Image
+==================
+docker stop $(docker ps -a -q)
+
+Test push Container
+	docker-compose build
+	docker images
+	docker-compose push
+	
+
+Install Cluster AKS
+===================		
+Install plugin monitoring
+	az provider show -n Microsoft.OperationsManagement -o table
+	az provider show -n Microsoft.OperationalInsights -o table
+	
+	az provider register --namespace Microsoft.OperationsManagement
+	az provider register --namespace Microsoft.OperationalInsights
+
+Create AKS
+	az aks create --resource-group RG-Microservices --name aks-microservices --node-count 1 --enable-addons monitoring --generate-ssh-keys
+
+
+Install CLI Kubernetes
+======================
+Install AKS CLI
+	az aks install-cli
+
+Install Chocolate
+	Get-ExecutionPolicy
+	Set-ExecutionPolicy AllSigned
+	Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+	
+Install Kubectl
+	choco install kubernetes-cli
+
+Set Credentials AKS to Context
+	az aks get-credentials --resource-group RG-Microservices --name aks-microservices
+	
+List Cluster's
+	kubectl config get-contexts
+
+Set Cluster
+	kubectl config use-context aks-microservices
+
+List nodes
+	kubectl get nodes
+	
+Join ACR with AKS
+	az aks update -n aks-microservices -g RG-Microservices --attach-acr acrmicroservicesapigateway
+	
+Enable Admin ACR
+	az acr update -n acrmicroservicesapigateway -g RG-Microservices --admin-enabled true
+
+	
+Enable AKS Dashboard (deprecated >=1.19.0)
+====================
+Disable Dashboard
+	az aks disable-addons -g RG-Microservices -n aks-microservices -a kube-dashboard
+	
+Enable Dashboard
+	az aks enable-addons -g RG-Microservices -n aks-microservices --addons kube-dashboard
+	
+Create admin rol if not exits
+	kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+	
+Start dashboard
+	az aks browse -g RG-Microservices -n aks-microservices
+	
+Set the admin kubeconfig 
+	az aks get-credentials -a --resource-group RG-Microservices --name aks-microservices
+
+Login into dashboard
+	Goto to http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#/login
+	Select Kubeconfig
+	Search Kubeconfig in Userprofile/.kube
+
+
+Deploy Application to AKS
+=========================
+deploy Kubernetes
+	kubectl apply -f transportservice-front.yaml
+	kubectl get services
+
+
+Create API Management
+=====================
+Create API Management Service
+	az apim create --name API-Management-Microservices --resource-group RG-Microservices -l eastus --publisher-name API-Management-Microservices-Company --publisher-email Scorpius86@hotmail.com --sku-name Developer --no-wait
+
+
+Connect API Managament To AKS
+=============================
+Add Sub new net to AKS
+	Name : api-gateway-subnet
+	Subnet address range : 10.0.0.0/29
+
+Join Virtual Network to API Managament
+	Virtual Network : External
+	Subnet : api-gateway-subnet
+	
+Add API
+	Configuration from Services
+
+Add App services
+
+
+
+
