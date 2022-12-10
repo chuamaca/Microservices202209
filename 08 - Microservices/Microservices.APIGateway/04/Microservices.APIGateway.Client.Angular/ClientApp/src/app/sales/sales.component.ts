@@ -9,17 +9,17 @@ import { HttpClient } from '@angular/common/http';
 export class SalesComponent implements OnInit {
 
   public orders: Order[];
-  //private salesUrl = "http://localhost:1042/gateway/sales";
-  private salesUrl = "https://api-management-microservices.azure-api.net/gateway/sales/";
+  private salesUrl = "http://localhost:1042/gateway/sales";
+  //private salesUrl = "https://api-management-microservices.azure-api.net/gateway/sales/";
 
   constructor(http: HttpClient) {
-    //http.get<Order[]>(this.salesUrl, {
-    //  headers: {
-    //    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFcmljayIsInVuaXF1ZV9uYW1lIjoiRXJpY2siLCJyb2xlIjpbIlNBTEVTTUFOIiwiVVNFUiJdLCJ1c2VyVHlwZSI6IlNBTEVTTUFOIiwibmJmIjoxNjI1Mjk4NzU4LCJleHAiOjE2MjU5MDM1NTgsImlhdCI6MTYyNTI5ODc1OH0.-hfGz7F8jgSHgthlR237FdW3IASIxa-TisW_2TDoenA'
-    //  }
-    //}).subscribe(result => {
-    //  this.orders = result;
-    //}, error => console.error(error));
+    http.get<Order[]>(this.salesUrl, {
+      headers: {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFcmljayIsInVuaXF1ZV9uYW1lIjoiRXJpY2siLCJyb2xlIjpbIlNBTEVTTUFOIiwiVVNFUiJdLCJ1c2VyVHlwZSI6IlNBTEVTTUFOIiwibmJmIjoxNjcwNjk3NDkwLCJleHAiOjE2NzEzMDIyOTAsImlhdCI6MTY3MDY5NzQ5MH0.xaGDqxjrB7V9Rujoj0I0ycTBTlagfPCwmy2QpGMJl8Q'
+      }
+    }).subscribe(result => {
+      this.orders = result;
+    }, error => console.error(error));
 
     http.get<Order[]>(this.salesUrl).subscribe(result => {
       this.orders = result;
