@@ -1,0 +1,46 @@
+Install SDK Google Cloud
+	https://cloud.google.com/sdk/docs/quickstart-windows?hl=es
+	
+#Authenticate our console session with gcloud
+	gcloud init --console-only
+	
+#Create a named gcloud project
+	gcloud projects create psdemogke-erick --name="Kubernetes-Cloud"
+	
+#Set our current project context
+	gcloud config set project psdemogke-erick
+	
+#Enable GKE services in our current project
+	gcloud services enable container.googleapis.com
+	
+#Tell GKE to create a single zone, three node cluster for us. 3 is the default size.
+#https://cloud.google.com/compute/quotas#checking_your_quota
+	gcloud container clusters create cscluster --region us-central1-a
+	
+#Get our credentials for kubectl
+	gcloud container clusters get-credentials cscluster --zone us-central1-a --project psdemogke-erick
+
+#Check out out lists of kubectl contexts
+	kubectl config get-contexts
+
+#set our current context to the GKE context
+	kubectl config use-context gke_psdemogke_us-central1-a_cscluster
+
+#run a command to communicate with our cluster.
+	kubectl get nodes
+
+#Delete our GKE cluster
+	#gcloud container clusters delete cscluster --zone=us-central1-a 
+
+#Delete our project.
+	#gcloud projects delete psdemogke
+
+
+#Get a list of all contexts on this system.
+	kubectl config get-contexts
+
+#Let's set to the kubectl context back to our local custer
+	kubectl config use-context kubernetes-admin@kubernetes
+
+#use kubectl get nodes
+	kubectl get nodes

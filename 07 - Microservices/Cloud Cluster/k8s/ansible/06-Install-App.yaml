@@ -1,0 +1,57 @@
+---
+
+- name: Install App
+  hosts: configurator-host
+  vars_files:
+    - "group_vars/global.yaml"
+  gather_facts: true  
+  tasks:
+    - name: Install client - configurator-host
+      shell: |    
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/local/bin/kubectl
+
+    - name: Copy admin.conf
+      copy:
+        src: "roles/master/files/{{ item }}"
+        dest: "{{ item }}"
+        owner: root
+        group: root
+        mode: 0644    
+      become: yes  
+      with_items:          
+        - "admin.conf"
+    
+    - name: Copy game.yaml
+      copy:
+        src: "../apps/2048-game/{{ item }}"
+        dest: "{{ item }}"
+        owner: root
+        group: root
+        mode: 0644    
+      become: yes  
+      with_items:          
+        - "game.yaml"
+    
+    - name: Authorize adminUser
+      shell: |
+        mkdir -p /home/{{ admin_user }}/.kube
+        cp -i admin.conf /home/{{ admin_user }}/.kube/config
+        chown $(id -u):$(id -g) "/home/{{ admin_user }}/.kube/config"
+
+    - name: Authorize root
+      shell: |
+        mkdir -p /root/.kube
+        cp -i admin.conf /root/.kube/config
+        chown $(id -u):$(id -g) /root/.kube/config
+
+    - name: Deploy Game
+      shell: |
+        kubectl create namespace game
+        kubectl apply -f game.yaml
+
+        
+        
+      
+

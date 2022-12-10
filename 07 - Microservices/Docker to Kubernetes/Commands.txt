@@ -1,0 +1,174 @@
+https://github.com/DanWahlin/Angular-JumpStart
+https://github.com/DanWahlin/DockerAndKubernetesCourseCode
+https://github.com/DanWahlin/CodeWithDanDockerServices
+
+Create User admin
+=================
+sudo kubectl create serviceaccount admin-client
+sudo kubectl create clusterrolebinding admin-client-binding --clusterrole=admin --serviceaccount=default:admin-client
+sudo kubectl get secrets
+kubectl describe secret admin-client-token-............ (Es dinamico)
+
+De lo anterior se extrae el token para el dashboard o conexion
+
+eyJhbGciOiJSUzI1NiIsImtpZCI6IlNYcm8yVFcxYlI5X1QxWElxVTdOSVluRnBfNlNTZ3haOEpNUV9HSmNjancifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFkbWluLWNsaWVudC10b2tlbi02ODljeCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhZG1pbi1jbGllbnQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI4MWM1ODE0MS1kNDc1LTQ2MTAtYWUzNC1jOTU0NjNjMmY2YmUiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDphZG1pbi1jbGllbnQifQ.GGmcxxR2HbFJULRNcYuYCBOOe60bDTq9N0KbXXTwm6SAktbPpN1I5vdG0dVDDhkXp4WlheH8u6swZpoYsbBbrzLt7rHIOOLeG3ehvLB8yDZce2iNdANN772quPfZL2tWC3ryRmrGHIoHSZXgwD-LkRs8htIatCgZqAreIBjWsp6Ew1jZSCYVErbhmzpgZc_sYGhV_cj5W9Hs9Xlp93Ryi5I1VLhhXWq7CBeAzn9vbT7aCknC95RpysNA0IDb3J6socTT1j1LLOXVLvDOcXfYke8vg-gdUk63PKZB5KW4usLmjCc_fIwzi9yrmEyDBcIqdkZ7-UjXaXkzhVjIFGDs0Q
+
+
+Connect to Docker hub
+=====================
+Run on master
+	sudo docker login
+	
+sudo kubectl create secret docker-registry regsecret --docker-username=scorpius8 --docker-password=****** --docker-email=scorpius86@gmail.com
+sudo kubectl get secret regsecret --output=yaml
+
+
+Connect Cluster
+===============
+
+Run on master
+	sudo kubectl config view --raw
+
+Copy to client : C:\Users\exterickarostegui\.kube\config
+
+List Contexts
+	kubectl config get-contexts
+	
+set context
+	kubectl config use-context kubernetes-admin@kubernetes
+	
+Install Dashboard
+=================
+
+https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+
+Install Dashboard
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.4/aio/deploy/recommended.yaml
+
+kubectl proxy (in other cmd)
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/.
+(use token)
+
+
+Install MetalLB 
+===============
+https://metallb.universe.tf/installation/
+
+(On master)
+
+kubectl edit configmap -n kube-system kube-proxy
+
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+mode: "ipvs"
+ipvs:
+  strictARP: true
+  
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+# On first install only
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+
+https://metallb.universe.tf/configuration/
+
+#configmap.yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 192.168.1.120-192.168.1.150
+
+	
+Docker Kompose
+============
+
+install Kompose
+	Download Kompose
+	Rename exe to Kompose.exe
+	Cut to d:\kompose\kompose.exe
+	Add Path on enviroment system (directory)
+
+Go to D:\GitHub\Angular-JumpStart
+
+Run (Si hay error de registry-1.docker.io/v2, setear el dns de docker a 8.8.8.8)
+	docker-compose build
+	docker-compose up -d
+	docker-compose push
+
+Go to Localhost
+View containers
+	docker ps
+	
+Stop all containers
+	docker stop $(docker ps -q)
+
+Create output foler from root folder
+
+convert ( kompose convert -h ; for help)
+	kompose convert --stdout (on console)
+	kompose convert --out ./output ((multiple files)
+	kompose convert --out ./output/output.yml (single file)
+
+Change api version network, deprecated in app-network-networkpolicy.yaml file	
+	extensions/v1beta1  => networking.k8s.io/v1
+	
+Deploy kubernetes (add type: NodePort, to services)
+	kubectl apply -f output
+	
+kubectl get pods -o wide
+kubectl get svc
+ 
+Remove 
+	kubectl delete -f output
+	
+Docker Skaffold
+===============
+
+install skaffold
+	Download Skaffold
+	Rename exe to Skaffold.exe
+	Cut to d:\Skaffold\Skaffold.exe
+	Add Path on enviroment system (directory)
+
+Go to D:\GitHub\Angular-JumpStart
+
+Run (Si hay error de registry-1.docker.io/v2, setear el dns de docker a 8.8.8.8)
+	docker-compose build
+	docker-compose up -d
+	
+Go to Localhost
+View containers
+	docker ps
+	
+Stop all containers
+	docker stop $(docker ps -q)
+	
+#skaffold init --compose-file docker-compose.yml -f skaffoldtest.yml -a '{"builder":"Docker"."payload":{"path":"Dockerfile"},"image":"scorpius8/generator:Multi"}' -a '{"builder":"Docker"."payload":{"path":"Dockerfile"},"image":"mailhog/mailhog"}'
+skaffold init --compose-file docker-compose.yml -f skaffoldtest.yml
+
+Move generated yaml to output directory
+
+Change manifests from skaffold.yml to
+	manifests:
+    - output/*.yaml
+	
+Add Step push
+	build:
+	  artifacts:
+	  - image: scorpius8/generator
+	  local:
+		push: true
+	
+Deploy kubernetes for dev (add type: NodePort, to services)
+	skaffold dev -f .\skaffold.yml
+	
+kubectl get svc

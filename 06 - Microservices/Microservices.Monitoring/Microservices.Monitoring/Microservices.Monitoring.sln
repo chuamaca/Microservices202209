@@ -1,0 +1,117 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Monitoring.DiscoveryService", "Microservices.Monitoring.DiscoveryService\Microservices.Monitoring.DiscoveryService.csproj", "{EF19215C-360E-481C-815E-0804F44BA936}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA8CDF53-8D2B-49AE-A4AB-A360423AC6D4}"
+	ProjectSection(SolutionItems) = preProject
+		Docker-Compose.yaml = Docker-Compose.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Spring Components", "02 - Spring Components", "{2BCB9645-D8AF-41F9-9F27-81382C31E3D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - Monitoring", "01 - Monitoring", "{3FAC5017-CFA5-4796-B1F3-F3B21307FDA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Monitoring.ConfigServer", "Microservices.Monitoring.ConfigServer\Microservices.Monitoring.ConfigServer.csproj", "{73961153-B6BE-4DAC-B55A-77FC1CFC21BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Monitoring.Products.API", "Microservices.Monitoring.Products.API\Microservices.Monitoring.Products.API.csproj", "{B56E4C36-CD7A-45D7-9CB0-777047CC339A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03 - Database", "03 - Database", "{F73D92BA-5838-490A-BFAE-2346D9CF9211}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Microservices.Monitoring.DB", "Microservices.Monitoring.DB\Microservices.Monitoring.DB.sqlproj", "{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04 - Repo", "04 - Repo", "{0D455026-C697-4BD2-B288-A2D8C3B9A238}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices.Monitoring.Dashboard", "Microservices.Monitoring.Dashboard", "{4A11C56D-3632-4896-A3D8-6FAA85A89E56}"
+	ProjectSection(SolutionItems) = preProject
+		Repo\Microservices.Monitoring.Dashboard\application-Development.yml = Repo\Microservices.Monitoring.Dashboard\application-Development.yml
+		Repo\Microservices.Monitoring.Dashboard\application-Production.yml = Repo\Microservices.Monitoring.Dashboard\application-Production.yml
+		Repo\Microservices.Monitoring.Dashboard\application.yml = Repo\Microservices.Monitoring.Dashboard\application.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices.Monitoring.Products.API", "Microservices.Monitoring.Products.API", "{D035EBB8-4F14-4C1C-BE11-8ADFF4D703F7}"
+	ProjectSection(SolutionItems) = preProject
+		Repo\Microservices.Monitoring.Products.API\application-Development.yml = Repo\Microservices.Monitoring.Products.API\application-Development.yml
+		Repo\Microservices.Monitoring.Products.API\application-Production.yml = Repo\Microservices.Monitoring.Products.API\application-Production.yml
+		Repo\Microservices.Monitoring.Products.API\application.yml = Repo\Microservices.Monitoring.Products.API\application.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices.Monitoring.Sales.API", "Microservices.Monitoring.Sales.API", "{6A8AD1E0-750E-4E49-B671-7EC0B8224D13}"
+	ProjectSection(SolutionItems) = preProject
+		Repo\Microservices.Monitoring.Sales.API\application-Development.yml = Repo\Microservices.Monitoring.Sales.API\application-Development.yml
+		Repo\Microservices.Monitoring.Sales.API\application-Production.yml = Repo\Microservices.Monitoring.Sales.API\application-Production.yml
+		Repo\Microservices.Monitoring.Sales.API\application.yml = Repo\Microservices.Monitoring.Sales.API\application.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Monitoring.Sales.API", "Microservices.Monitoring.Sales.API\Microservices.Monitoring.Sales.API.csproj", "{B98775BD-5EB6-4710-BABE-625C935CD051}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Monitoring.Client.MVC", "Microservices.Monitoring.Client.MVC\Microservices.Monitoring.Client.MVC.csproj", "{AF1FF436-62E4-4CBC-9424-0B1718CAAD8B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservices.Monitoring.Dashboard", "Microservices.Monitoring.Dashboard\Microservices.Monitoring.Dashboard.csproj", "{C0BEDF2B-5FE2-4CDF-9ABB-DC634FC3BDA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices.Monitoring.Client.MVC", "Microservices.Monitoring.Client.MVC", "{697C8D50-04FB-4526-97CD-AFDA0A5F0A26}"
+	ProjectSection(SolutionItems) = preProject
+		Repo\Microservices.Monitoring.Client.MVC\application-Development.yml = Repo\Microservices.Monitoring.Client.MVC\application-Development.yml
+		Repo\Microservices.Monitoring.Client.MVC\application-Production.yml = Repo\Microservices.Monitoring.Client.MVC\application-Production.yml
+		Repo\Microservices.Monitoring.Client.MVC\application.yml = Repo\Microservices.Monitoring.Client.MVC\application.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF19215C-360E-481C-815E-0804F44BA936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF19215C-360E-481C-815E-0804F44BA936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF19215C-360E-481C-815E-0804F44BA936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF19215C-360E-481C-815E-0804F44BA936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73961153-B6BE-4DAC-B55A-77FC1CFC21BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73961153-B6BE-4DAC-B55A-77FC1CFC21BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73961153-B6BE-4DAC-B55A-77FC1CFC21BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73961153-B6BE-4DAC-B55A-77FC1CFC21BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B56E4C36-CD7A-45D7-9CB0-777047CC339A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56E4C36-CD7A-45D7-9CB0-777047CC339A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56E4C36-CD7A-45D7-9CB0-777047CC339A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B56E4C36-CD7A-45D7-9CB0-777047CC339A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B98775BD-5EB6-4710-BABE-625C935CD051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98775BD-5EB6-4710-BABE-625C935CD051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98775BD-5EB6-4710-BABE-625C935CD051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98775BD-5EB6-4710-BABE-625C935CD051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1FF436-62E4-4CBC-9424-0B1718CAAD8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1FF436-62E4-4CBC-9424-0B1718CAAD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1FF436-62E4-4CBC-9424-0B1718CAAD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1FF436-62E4-4CBC-9424-0B1718CAAD8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0BEDF2B-5FE2-4CDF-9ABB-DC634FC3BDA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0BEDF2B-5FE2-4CDF-9ABB-DC634FC3BDA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0BEDF2B-5FE2-4CDF-9ABB-DC634FC3BDA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0BEDF2B-5FE2-4CDF-9ABB-DC634FC3BDA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EF19215C-360E-481C-815E-0804F44BA936} = {2BCB9645-D8AF-41F9-9F27-81382C31E3D2}
+		{73961153-B6BE-4DAC-B55A-77FC1CFC21BE} = {2BCB9645-D8AF-41F9-9F27-81382C31E3D2}
+		{B56E4C36-CD7A-45D7-9CB0-777047CC339A} = {3FAC5017-CFA5-4796-B1F3-F3B21307FDA3}
+		{E736F30C-C1B1-40DE-BC51-A54B1A2CBC18} = {F73D92BA-5838-490A-BFAE-2346D9CF9211}
+		{4A11C56D-3632-4896-A3D8-6FAA85A89E56} = {0D455026-C697-4BD2-B288-A2D8C3B9A238}
+		{D035EBB8-4F14-4C1C-BE11-8ADFF4D703F7} = {0D455026-C697-4BD2-B288-A2D8C3B9A238}
+		{6A8AD1E0-750E-4E49-B671-7EC0B8224D13} = {0D455026-C697-4BD2-B288-A2D8C3B9A238}
+		{B98775BD-5EB6-4710-BABE-625C935CD051} = {3FAC5017-CFA5-4796-B1F3-F3B21307FDA3}
+		{AF1FF436-62E4-4CBC-9424-0B1718CAAD8B} = {3FAC5017-CFA5-4796-B1F3-F3B21307FDA3}
+		{C0BEDF2B-5FE2-4CDF-9ABB-DC634FC3BDA3} = {3FAC5017-CFA5-4796-B1F3-F3B21307FDA3}
+		{697C8D50-04FB-4526-97CD-AFDA0A5F0A26} = {0D455026-C697-4BD2-B288-A2D8C3B9A238}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BE8B810-86E8-4303-933E-8C099E86C9AB}
+	EndGlobalSection
+EndGlobal

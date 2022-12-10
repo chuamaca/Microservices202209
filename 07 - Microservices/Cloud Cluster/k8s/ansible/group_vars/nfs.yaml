@@ -1,0 +1,11 @@
+---
+
+epel_release_rpms: ['epel-release']
+nfs_utils_rpms: ['nfs-utils']
+net_tools_rpms: ['net-tools']
+cloud_utils_growpart_rpms: ['cloud-utils-growpart']
+
+epel_release_debs: ['epel-release']
+nfs_utils_debs: ['nfs-utils']
+net_tools_debs: ['net-tools']
+cloud_utils_growpart_debs: ['cloud-utils-growpart']

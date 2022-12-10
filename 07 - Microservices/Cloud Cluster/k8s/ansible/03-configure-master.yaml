@@ -1,0 +1,9 @@
+---
+
+- name: Configure Master
+  hosts: master
+  vars_files:
+    - "group_vars/master.yaml"
+  gather_facts: true
+  roles:
+    - master

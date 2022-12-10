@@ -1,0 +1,70 @@
+Requisitos :
+
+- Vagrant
+- Hyper-V
+
+
+Copiar la carpeta "Local Cluster" al disco donde van estar las imagenes
+
+
+Install Master
+==============
+
+Modificar el Vagranfile 
+	config.vm.hostname = "k8s-master" // modificar con el nombre de maquina que uno desee
+	p.vmname = "k8s-master" // modificar con el nombre de maquina que uno desee
+	
+Modificar configure-static-ip.sh
+	addresses: [192.168.1.110/24] // con la direccion IP que defina
+    gateway4: 192.168.1.1 // con la direccion IP que defina
+	127.0.1.1       k8s-master      k8s-master  //modificar con el nombre de maquina que uno desee
+	192.168.1.110   k8s-master      k8s-master  //modificar nombre e ip definidos
+	192.168.1.111	k8s-node01      k8s-node01  //modificar nombre e ip definidos
+	192.168.1.112	k8s-node02      k8s-node02  //modificar nombre e ip definidos
+	
+Modificar calico.yaml
+	- name: CALICO_IPV4POOL_CIDR  //Habilitar
+      value: "192.168.0.0/16"  // habilitar y modificar con el ip que defina para el cluster (las ips para la generacion de pods)
+	  
+modificar configure-master.sh
+	  echo "$(sudo kubeadm init --pod-network-cidr=192.168.0.0/16)"  // modificar el IP asignado anteriormente
+	  
+Abrir el power shell en modo administrador y ejecutar
+	vagrant up --provision
+	
+
+Install Node (Repetir lo mismo para todos los nodos que desee)
+==============================================================
+
+Modificar el Vagranfile 
+	config.vm.hostname = "k8s-node01" // modificar con el nombre de maquina que uno desee
+	p.vmname = "k8s-node01" // modificar con el nombre de maquina que uno desee
+	
+Modificar configure-static-ip.sh
+	addresses: [192.168.1.111/24] // con la direccion IP que defina
+    gateway4: 192.168.1.1 // con la direccion IP que defina
+	127.0.1.1       k8s-node01      k8s-node01  //modificar con el nombre de maquina que uno desee
+	192.168.1.110   k8s-master      k8s-master  //modificar nombre e ip definidos
+	192.168.1.111	k8s-node01      k8s-node01  //modificar nombre e ip definidos
+	192.168.1.112	k8s-node02      k8s-node02  //modificar nombre e ip definidos
+	
+Ingresar al master
+	vagrant ssh
+
+Generar Token
+	sudo kubeadm token create
+	
+Generar Certificado
+	sudo openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+	
+modificar configure-node.sh (El token y el certificado se crea cuando instalas el master busca join el log d ela consola)
+	#sudo kubeadm join [IP_MASTER]:6443 \
+	#	--token [TOKEN] \
+	#	--discovery-token-ca-cert-hash sha256:[CERTIFICADO] 
+	  
+Abrir el power shell en modo administrador y ejecutar
+	vagrant up --provision	
+	
+	
+	
+	

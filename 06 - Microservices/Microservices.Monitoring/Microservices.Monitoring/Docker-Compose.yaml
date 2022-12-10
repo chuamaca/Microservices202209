@@ -1,0 +1,107 @@
+version: '3.4'
+
+services:
+  ########################################################## MSSQL Server ##################################################################################
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433 
+    environment:
+      - SA_PASSWORD=Password1234
+      - ACCEPT_EULA=Y
+    networks:
+      - backend
+  ########################################################## Discovery Server ##################################################################################
+  microservices.monitoring.discoveryservice:
+    container_name: microservices.monitoring.discoveryservice
+    image: microservices.monitoring.discoveryservice
+    build:
+      context: microservices.monitoring.discoveryservice
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - backend
+  ########################################################## ConfigServer Server ##################################################################################
+  microservices.monitoring.configserver:
+    container_name: microservices.monitoring.configserver
+    image: microservices.monitoring.configserver
+    build:
+      context: microservices.monitoring.configserver
+      dockerfile: Dockerfile
+    ports:
+      - 8889:8889
+    networks:
+      - backend
+    depends_on:
+      - microservices.monitoring.discoveryservice
+  ########################################################## Products API ##################################################################################
+  microservices.monitoring.products.api:
+    #container_name: microservices.monitoring.products.api
+    image: microservices.monitoring.products.api
+    build:
+      context: microservices.monitoring.products.api
+      dockerfile: Dockerfile
+    deploy:
+      replicas: 3
+    #ports:
+    #  - 8081:80
+    #  - 8082:443
+    networks:
+      - backend
+    depends_on:
+      - microservices.monitoring.configserver
+    restart: on-failure
+  ########################################################## Sales API ##################################################################################
+  microservices.monitoring.sales.api:
+    #container_name: microservices.monitoring.sales.api
+    image: microservices.monitoring.sales.api
+    build:
+      context: microservices.monitoring.sales.api
+      dockerfile: Dockerfile
+    deploy:
+      replicas: 3
+    #ports:
+    #  - 8083:80
+    #  - 8084:443
+    networks:
+      - backend
+    depends_on:
+      - microservices.monitoring.configserver
+    restart: on-failure
+  ########################################################## Client MVC ##################################################################################
+  microservices.monitoring.client.mvc:
+    container_name: microservices.monitoring.client.mvc
+    image: microservices.monitoring.client.mvc
+    build:
+      context: microservices.monitoring.client.mvc
+      dockerfile: Dockerfile
+    ports:
+      - 8085:80
+      - 8086:443
+    networks:
+      - backend
+    depends_on:
+      - microservices.monitoring.products.api
+    restart: on-failure
+  ########################################################## Dashboard ##################################################################################
+  microservices.monitoring.dashboard:
+    container_name: microservices.monitoring.dashboard
+    image: microservices.monitoring.dashboard
+    build:
+      context: microservices.monitoring.dashboard
+      dockerfile: Dockerfile
+    ports:
+      - 8087:80
+      - 8088:443
+    networks:
+      - backend
+    depends_on:
+      - microservices.monitoring.products.api
+      - microservices.monitoring.sales.api
+    restart: on-failure    
+########################################################## Network ##################################################################################
+networks:
+  backend:
+    name: backend
+    driver: bridge

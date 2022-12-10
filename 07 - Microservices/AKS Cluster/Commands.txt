@@ -1,0 +1,69 @@
+Creando un cluster en AKS
+=========================
+#Ensure Azure CLI command line utilitles are installed
+#https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
+
+#Log into our subscription
+az login
+az account set --subscription "Microsoft Partner Network"
+
+#Create a resource group for the serivces we're going to create
+az group create --name "Kubernetes-Cloud" --location centralus
+
+#Check Extensions (AKS)
+az extension list-available --output table
+
+#Install extension AKS
+az extension add --name aks-preview
+
+#Let's get a list of the versions available to us, 
+az aks get-versions --location centralus -o table
+
+#let's check out some of the options available to us when creating our managed cluster
+az aks create -h | more
+
+
+#Enable monotiring
+#Check plugin
+az provider show -n Microsoft.OperationsManagement -o table
+az provider show -n Microsoft.OperationalInsights -o table
+
+#Install plugin monitoring
+az provider register --namespace Microsoft.OperationsManagement
+az provider register --namespace Microsoft.OperationalInsights
+
+#En Linux
+#Let's create our AKS managed cluster. 
+az aks create \
+    --resource-group "Kubernetes-Cloud" \
+    --generate-ssh-keys \
+    --name CSCluster \
+    --node-count 3 #default Node count is 3
+
+#En windows
+az aks create --resource-group "Kubernetes-Cloud" --generate-ssh-keys --name CSCluster --node-count 3
+
+#On windows & monitoring
+az aks create --resource-group "Kubernetes-Cloud" --generate-ssh-keys --name CSCluster --node-count 3 --enable-addons monitoring
+
+#If needed, we can download and install kubectl on our local system.
+az aks install-cli
+
+#Get our cluster credentials and merge the configuration into our existing config file.
+#This will allow us to connect to this system remotely using certificate based user authentication.
+az aks get-credentials --resource-group "Kubernetes-Cloud" --name CSCluster
+
+#List our currently available contexts
+kubectl config get-contexts
+
+#set our current context to the Azure context
+kubectl config use-context CSCluster
+
+#run a command to communicate with our cluster.
+kubectl get nodes
+
+#Get a list of running pods, we'll look at the system pods since we don't have anything running.
+#Since the API Server is HTTP based...we can operate our cluster over the internet...esentially the same as if it was local using kubectl.
+kubectl get pods --all-namespaces
+
+#az aks delete --resource-group "Kubernetes-Cloud" --name CSCluster #--yes --no-wait

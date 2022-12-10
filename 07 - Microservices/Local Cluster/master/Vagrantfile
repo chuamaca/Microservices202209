@@ -1,0 +1,18 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "generic/ubuntu2004"
+  config.vm.provider "hyperv"
+  config.vm.hostname = "k8s-master"
+  config.vm.network "private_network", bridge: "Default Switch"
+  
+  config.vm.provider "hyperv" do |p|
+  	p.memory = "2048"
+  	p.cpus = "2"
+  	p.vmname = "k8s-master"
+  end
+  
+  config.vm.provision "file", source: "calico.yaml", destination: "calico.yaml"
+  
+  config.vm.provision :shell, path: "configure-static-ip.sh", run: 'always', reboot:true
+  config.vm.provision :shell, path: "configure-prerequisites-k8s.sh", run: 'always'  
+  config.vm.provision :shell, path: "configure-master.sh", run: 'always'
+end

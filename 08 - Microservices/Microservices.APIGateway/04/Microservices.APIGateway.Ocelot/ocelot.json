@@ -1,0 +1,96 @@
+{
+  "Routes": [
+    //Products
+    {
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservices-apigateway-product-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/products",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/products/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservices-apigateway-product-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/products/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    //Sales
+    {
+      "DownstreamPathTemplate": "/api/sales",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservices-apigateway-sale-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/sales",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/api/sales/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "microservices-apigateway-sale-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/sales/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "FileCacheOptions": { "TtlSeconds": 15 },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
+      },
+      "DangerousAcceptAnyServerCertificateValidator": true
+    }
+  ],
+  "GlobalConfiguration": {
+    
+  }
+}

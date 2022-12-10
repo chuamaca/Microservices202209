@@ -1,0 +1,115 @@
+---
+######################################## Red Hat ########################################
+- name: Install epel-release (Red Hat)
+  dnf:
+    name: "{{ epel_release_rpms }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: Install cloud-utils-growpart (Red Hat)
+  dnf:
+    name: "{{ cloud_utils_growpart_rpms }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: Install nfs-utils (Red Hat)
+  dnf:
+    name: "{{ nfs_utils_rpms }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'RedHat'
+
+- name: Install net-tools (Red Hat)
+  dnf:
+    name: "{{ net_tools_rpms }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'RedHat'
+######################################### Debian ########################################
+- name: Install epel-release (Debian)
+  apt:
+    name: "{{ epel_release_debs }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: install cloud-utils-growpart (Debian)
+  apt:
+    name: "{{ cloud_utils_growpart_debs }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install nfs-utils (Debian)
+  dnf:
+    name: "{{ nfs_utils_debs }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install net-tools (Debian)
+  dnf:
+    name: "{{ net_tools_debs }}"
+    state: present
+  become: yes
+  when: ansible_os_family == 'Debian'
+######################################### Cross ########################################
+- name: Identifying the data disk
+  shell: lsblk -r --output NAME,MOUNTPOINT | awk -F \/ '/sd/ { dsk=substr($1,1,3);dsks[dsk]+=1 } END { for ( i in dsks ) { if (dsks[i]==1) print i } }'
+  register: dataDisk
+
+- debug: msg="{{dataDisk.stdout}}"
+
+- name: Create physical volume
+  shell: pvcreate /dev/{{dataDisk.stdout}}
+  ignore_errors: yes
+
+- name: Create volume group
+  shell: vgcreate data_vg /dev/{{dataDisk.stdout}}
+  ignore_errors: yes
+
+- name: Check volume group
+  shell: vgdisplay data_vg
+
+- name: Create Logical volume
+  lvol:
+    vg: data_vg
+    lv: nfs_lv
+    size: 9.9g
+
+- name: Check Logical volume
+  shell: lvs
+
+- name: Create the filesystem of type XFS
+  filesystem:
+    fstype: xfs
+    dev: /dev/data_vg/nfs_lv
+
+- name: Create mount point
+  shell: mkdir /srv/nfs
+
+- name: Write mount point
+  shell: echo "/dev/data_vg/nfs_lv        /srv/nfs                xfs     defaults        0 0" >> /etc/fstab
+
+- name: Check mount
+  shell: mount -a
+
+- name: Check mount df
+  shell: df -hP
+
+- name: Configure access to the NFS share
+  template:
+    src: exports.j2
+    dest: /etc/exports
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  
+- name: Lets reread the file | exportfs -r
+  shell: exportfs -r
+
+- name: Lets reread the file | exportfs -s
+  shell: exportfs -s

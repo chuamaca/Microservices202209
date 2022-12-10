@@ -1,0 +1,352 @@
+Create Infgrastructure Azure
+============================
+
+01 - Docker Tutorial
+====================
+Go to \k8s\terraform\01 folder
+terraform init
+terraform plan
+terraform apply (yes)
+
+01 - Azure Tutorial
+====================
+Go to \k8s\terraform\02 folder
+terraform init
+terraform plan
+terraform apply (yes)
+
+03 - Azure Kubernetes Cluster
+=============================
+Go to \k8s\terraform\03 folder
+
+Configure manually before running
+
+az login
+az account set --subscription=<SUBSCRIPTION_ID>
+az ad sp create-for-rbac --role=<Contributor>
+
+Copy to secret.tf
+subscription_id
+appID
+password
+tenant
+
+az vm image accept-terms --urn cognosys:centos-8-stream-free:centos-8-stream-free:1.2019.0810
+                                                                                             
+terraform init
+terraform plan
+terraform apply (yes)
+
+Login remote
+ssh-keygen -R vmip-configurator-host-ms-publicip.westeurope.cloudapp.azure.com
+ssh -o StrictHostKeyChecking=no -I .\k8s\terraform\id_rsa adminUser@vmip-configurator-host-ms-publicip.westeurope.cloudapp.azure.com
+
+#ansible-playbook -l all ansible/00-run-all.yaml
+ansible-playbook -l nfs ansible/01-configure-nfs.yaml
+ansible-playbook -l cluster ansible/02-configure-cluster.yaml
+ansible-playbook -l master ansible/03-configure-master.yaml
+ansible-playbook -l node ansible/04-configure-node.yaml
+ansible-playbook -l master ansible/05-labeling-addons.yaml
+
+#Copy Master Public IP to local machine hosts
+#20.101.79.40 k8s-c8-master
+
+Install kubernetes-cli
+----------------------
+https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/#install-on-windows-using-chocolatey-or-scoop
+
+#go to remote
+vim ansible/roles/master/files/admin.conf copy to %USERPROFILE%/.kube/config (create folder)
+replace server with k8s-c8-master
+
+#go to local
+#list config
+kubectl config view
+
+#list contexts
+kubectl config get-contexts
+
+#Connect Dashboard
+#go to remote
+vim ansible/roles/master/files//kube_token_cmd.txt copy token
+eyJhbGciOiJSUzI1NiIsImtpZCI6IkJSdWFYbkwyb3JxQ1U1TU4tOWJRM3gwVU9HV0wwMFUwbDVHRmdPSXdZWE0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi11c2VyLXRva2VuLW01NXRnIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFkbWluLXVzZXIiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI4ZmQ2ZGI4Ni1iMGZiLTRmYjctOTMwOC1mZWRjMjFjMTgyODQiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6a3ViZXJuZXRlcy1kYXNoYm9hcmQ6YWRtaW4tdXNlciJ9.irUzOgeMgHJGAdjsuaPbPsKrc-nM2Tdt-7GaEgUO2PTBbRpupByEcDoQDlxmNvf27qiFES8FaSKbtjN4qL4yTkCRAdyd1BCWFKhYrkdOzqkyaeMf9N6ZWDFT_o4PlU6YVJsPS6-n1K7CXQWcy5RRfaSNy9epHeclJfvLfRo8p0dUjJn58DRahEeBz6l6kTUdlslNupKEASamZSVUFr7tSdjU7GlarQjfWS31iUqmgNwA4oxpimwSiMDiDsiORGw8na-9yMdSjiOR3n3SDl5joHkDjlVEbwYXWcspllcD4UoKlZriZmQtrszJ0OMIr0HIP0AhARtT-6n-uXphxFEZPQ
+
+kubectl proxy (in other cmd)
+use token
+
+#Get IPMaster
+#Go to root folder local
+Set-Variable -Name "ipMaster" -Value $(az vm show -d -g rg-kubernetes-ms -n k8s-c8-master --query publicIps -o tsv)
+
+#Set hosts
+.\Set-HostsEntry -IPAddress $ipMaster -HostName "game.bar" -Path "C:\Windows\System32\drivers\etc\hosts"
+
+#Get Node Port Ingress
+Set-Variable -Name "nodePort" -Value $(ssh -o StrictHostKeyChecking=no -I .\k8s\terraform\id_rsa adminUser@vmip-configurator-host-ms-publicip.westeurope.cloudapp.azure.com "kubectl get svc -n=haproxy-controller -o go-template='{{range .items}}{{range.spec.ports}}{{if .nodePort}}{{.nodePort}}{{""""\n""""}}{{end}}{{end}}{{end}}'").Split("\n")[0]
+
+#Get URL game
+Set-Variable -Name "urlGame" -Value "http://game.bar:$nodePort"
+echo "Test url = http://game.bar:$nodePort"
+
+#Ingress
+#Go to apps
+kubectl create namespace webapp-routed
+kubectl apply -f first-routed-webapp/first-routed-webapp.yaml
+kubectl apply -f first-routed-webapp/ingress.yaml
+kubectl apply -f first-routed-webapp/configmap.yaml
+
+kubectl get svc --namespace=haproxy-controller
+kubectl get ep --namespace=webapp-routed
+
+#in remote config host or config host and open browser
+curl -I -H 'Host: foo.bar' 'http://<IP-MASTER>:<PORT-HAPROXY-INGRESS>/webapp' (cmd)
+
+
+
+
+
+
+
+
+
+Pods
+=====
+#Run Pod
+kubectl run [podname] --image=nginx:alpine
+
+#List pods (No system)
+kubectl get pods
+
+#List all resources
+kubectl get all
+
+#Expose Pod Extrena:Internal
+kubectl port-forward [name-pod] 8080:80
+
+#Delete Pod
+kubectl delete pod [name-pod]
+
+Using Kubectl
+=============
+
+#Listing and Inspecting your cluster, pods, services and more.
+kubectl cluster-info
+
+#review status and roles
+kubectl get nodes
+
+#Additional information about each node in the cluster. 
+kubectl get nodes -o wide
+
+#Let's get a list of pods...but there isn't any running.
+kubectl get pods 
+
+#True, but let's get a list of system pods. A namespace is a way to group resources together.
+kubectl get pods --namespace kube-system
+
+#Let's get additional information about each pod. 
+kubectl get pods --namespace kube-system -o wide
+
+#Now let's get a list of everything that's running in all namespaces
+kubectl get all --all-namespaces | more
+
+#Asking kubernetes for the resources it knows about
+#Let's look at the headers in each column. Name, Alias/shortnames, API Group (or where that resource is in the k8s API Path),
+#Is the resource in a namespace, for example StorageClass issn't and is available to all namespaces and finally Kind...this is the object type.
+kubectl api-resources | head -n 10
+
+#We can easily filter using group
+kubectl api-resources | grep pod
+
+#Explain an indivdual resource in detail
+kubectl explain pod | more 
+kubectl explain pod.spec | more 
+kubectl explain pod.spec.containers | more 
+
+#You'll soon find your favorite alias
+kubectl get no
+
+#Let's take a closer look at our nodes using Describe
+#Check out Name, Taints, Conditions, Addresses, System Info, Non-Terminated Pods, and Events
+kubectl describe nodes k8s-c8-master
+kubectl describe nodes k8s-c8-node01
+
+#Ok, so now that we're tired of typing commands out, let's enable bash auto-complete of our kubectl commands
+sudo apt-get install bash-completion
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+source ~/.bashrc
+kubectl g[tab][tab] po[tab][tab] --all[tab][tab]
+
+kubectl -h | more
+kubectl get -h | more
+kubectl describe -h | more 
+
+
+Deploy applications
+===================
+
+#Imperatively working with your cluster. Run will "generate" a Deployment by default.
+#This is pulling a specified image from Google's container registry.
+#kubectl run, will convert a pod creation into a "Deployment generator"
+#http://kubernetes.io/docs/user-guide/kubectl-conventions/#generators 
+
+#UPDATE: Starting in kubernetes 1.18 kubectl run creates a pod rather than a deployment. 
+#kubectl run hello-world --image=gcr.io/google-samples/hello-app:1.0
+#To create a deployment, we need kubectl create deployment
+kubectl create deployment hello-world --image=gcr.io/google-samples/hello-app:1.0
+
+
+#But let's deploy a single pod too...
+kubectl run hello-world-pod --image=gcr.io/google-samples/hello-app:1.0 --generator=run-pod/v1
+
+#Let's follow our pod and deployment status
+kubectl get pods
+kubectl get deployment
+kubectl get pods -o wide
+
+#Remember, k8s is a container orchestrator and it's starting up containers on Nodes.
+#Open a second terminal and ssh into the node that hello-world pod is running on.
+#Exectute in node
+sudo docker ps
+exit
+
+#Back on the Master, we can pull the logs from the container. Which is going to be anything written to stdout. 
+#Maybe something went wrong inside our app, and our pod won't start. This is useful for troubleshooting.
+#Execute in master
+kubectl logs hello-world-pod
+
+#Starting a process inside a container inside a pod.
+#We can use this to launch any process as long as the executable/binary is in the container.
+#Launch a shell into the container. Callout that this is on the *pod* network.
+kubectl exec -it hello-world-pod  -- /bin/sh
+hostname
+ip addr
+exit
+
+#Remember that first kubectl run we executed, it created a Deployment for us.
+#Let's look more closely at the deployment
+#Deployments are made of ReplicaSets!
+kubectl get deployment hello-world
+kubectl get replicaset
+kubectl get pods
+
+#Let's take a closer look at our pod.
+#Walk through the pods Events...
+#Name, Containers, Ports, Conditions, and Events. 
+#Deployments are made of ReplicaSets!
+kubectl describe deployment hello-world | more
+
+#Let's see what describe can tell us about a deployed Pod.
+#Check out the Name, Node, Status, Containers, and events.
+kubectl get pods
+kubectl describe pods $PASTEPODNAMEHERE | more
+
+#Expose the Deployment as a Serivce.
+#This will create a Service for the ReplicaSet behind the Deployment
+#We are exposing our serivce on port 80, connecting to an application running on 8080 in our pod.
+#Port: Interal Cluster Port, the Service's port. You will point cluster resources here.
+#TargetPort: The Pod's Serivce Port, your application. That one we defined when we started the pods.
+kubectl expose deployment hello-world --port=80 --target-port=8080
+
+#Check out the IP: and Port:, that's where we'll access this service.
+kubectl get service hello-world
+
+#We can also get that information from using get
+kubectl describe service hello-world
+
+#Access the service inside the cluster
+curl http://$SERVCIEIP:$PORT
+
+#Access the pod's application directly, useful for troubleshooting.
+kubectl get endpoints hello-world
+curl http://$ENDPOINT:$TARGETORT
+
+#Using kubectl to generate yaml or json files of our imperitive configuration.
+kubectl get service hello-world -o yaml
+kubectl get service hello-world -o json
+
+#UPDATE: --export has been deprecated. #We'll use dry-run below to create these yaml files
+#Exported resources are stripped of cluster-specific information.
+#kubectl get service hello-world -o yaml --export > service-hello-world.yaml
+#kubectl get deployment hello-world -o yaml --export > deployment-hello-world.yaml
+#ls *.yaml
+#more service-hello-world.yaml
+
+#We can ask the API for more information about an object
+kubectl explain service | more
+
+#And drill down further if needed, includes very good explanation of what's available for that resource
+kubectl explain service.spec | more
+kubectl explain service.spec.ports
+kubectl explain service.spec.ports.targetPort
+
+#Let's remove everything we created imperitively and start over using a declarative model
+kubectl delete service hello-world
+kubectl delete deployment hello-world
+kubectl delete pod hello-world-pod
+kubectl get all
+
+#Deploying applications declarativly
+#we can use apply to create our resources from yaml.
+kubectl create deployment hello-world --image=gcr.io/google-samples/hello-app:1.0 --dry-run=client -o yaml > deployment-hello-world.yaml
+more deployment-hello-world.yaml
+kubectl apply -f deployment-hello-world.yaml
+
+kubectl expose deployment hello-world --port=80 --target-port=8080 --dry-run=client -o yaml > service-hello-world.yaml 
+more service-hello-world.yaml 
+kubectl apply -f service-hello-world.yaml 
+
+#This creates everything we created, but in yaml
+kubectl get all
+
+#scale up our deployment
+vi deployment-hello-world.yaml
+Change replicas from 1 to 2
+     replicas: 2
+
+#update our configuration with apply
+kubectl apply -f deployment-hello-world.yaml
+
+#And check the current configuration of our deployment
+kubectl get deployment hello-world
+
+#Repeat the curl access to see the load balancing of the HTTP request
+kubectl get service hello-world
+curl http://$SERVICEIP:PORT
+
+#We can edit the resources "on the fly" with kubectl edit. But this isn't reflected in our yaml. But is
+#persisted in the etcd database...cluster store. Change 2 to 3.
+kubectl edit deployment hello-world
+
+#Let's clean up our deployment and remove everything
+kubectl delete deployment hello-world
+kubectl delete service hello-world
+
+kubectl get all
+
+
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImYxTG82ay1SVjdLVWRvb0xuN29ENWRjTy03eTI5bk9wRkU1eURWYmF2N2cifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFkbWluLWNsaWVudC10b2tlbi1mMmR0cCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhZG1pbi1jbGllbnQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiI0MjJkMDczNC02NDkwLTRiZTAtODBhOC04ZjE1YzMzNTY5YjgiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVmYXVsdDphZG1pbi1jbGllbnQifQ.N_kRMZYP9u_o2BSX5chFNHA9tBWXRivotWZLAEocaOlkhkXjogulGFPeS4DMAcXHCG9D6gCFLag-J4ITnJV1jfOHjMaV8SvNUADCAlPT6BguG-3-6Gnpe0XQn9pZWWLo3cAkkvS2TtLMfPJZfDSTP_4q7YE2xhIBuNOVDsbb9wcyxe6XRxGJD4TqLLdh_0Ttm9dHTFnH00icpaaDybKO2f1WJYIbgqMhGOKsZQtEUU_Rmi0gAsYfcmHfJi7cPXdc20VtALO-KMvLagArUyUbiFpyEJTTY-NPUVSsYk1Cmz22Az_JDicPTAd6ksyafhpK6D07OUlH5dRjChBbWuAM8Q
+
+Services
+=========
+
+Port forward (External : Internal)
+	kubectl port-forward pod/my-nginx-5bb9b897c8-226rk 8080:80
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

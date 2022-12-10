@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: microservices-apigateway-product-api
+  name: microservices-apigateway-product-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: microservices-apigateway-product-api
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.kompose.service: microservices-apigateway-product-api
+    spec:
+      containers:
+      - image: acrmicroservicesapigateway.azurecr.io/microservicesapigatewayproductapi
+        imagePullPolicy: ""
+        name: microservices-apigateway-product-api
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}

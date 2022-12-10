@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  microservices-apigateway-product-api:
+    image: scorpius8/microservicesapigatewayproductapi
+    ports:
+      - "80"
+      - "443"    
+    build:
+      context: .
+      dockerfile: Microservices.APIGateway.Product.API/Dockerfile
+  microservices-apigateway-sale-api:
+    image: scorpius8/microservicesapigatewaysaleapi
+    ports:
+      - "80" 
+      - "443"    
+    build:
+      context: .
+      dockerfile: Microservices.APIGateway.Sale.API/Dockerfile
+  microservices-apigateway-ocelot:
+    image: scorpius8/microservicesapigatewayocelot
+    ports:
+      - "80" 
+      - "443"    
+    build:
+      context: .
+      dockerfile: Microservices.APIGateway.Ocelot/Dockerfile

@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  microservices-apigateway-product-api:
+    image: acrmicroservicesapigateway.azurecr.io/microservicesapigatewayproductapi
+    ports:
+      - "80"      
+    build:
+      context: .
+      dockerfile: Microservices.APIGateway.Product.API/Dockerfile
+  microservices-apigateway-sale-api:
+    image: acrmicroservicesapigateway.azurecr.io/microservicesapigatewaysaleapi
+    ports:
+      - "80"      
+    build:
+      context: .
+      dockerfile: Microservices.APIGateway.Sale.API/Dockerfile

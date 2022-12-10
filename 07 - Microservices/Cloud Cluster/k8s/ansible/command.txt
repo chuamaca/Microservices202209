@@ -1,0 +1,24 @@
+#ansible-playbook -i hosts -l haproxy deploy-haproxy.yaml
+ansible-playbook -l all ansible/00-run-all.yaml
+ansible-playbook -l nfs ansible/01-configure-nfs.yaml
+ansible-playbook -l cluster ansible/02-configure-cluster.yaml
+ansible-playbook -l master ansible/03-configure-master.yaml
+ansible-playbook -l node ansible/04-configure-node.yaml
+ansible-playbook -l master ansible/05-labeling-addons.yaml
+ansible-playbook -l configurator-host ansible/06-Install-App.yaml
+
+
+
+
+az vm open-port -g kubernetes_rg --name k8s-c8-master --port 32107
+
+
+kubectl create namespace nginx-ingress
+kubectl apply -f nginx-ingress.yaml
+kubectl get all -n nginx-ingress
+
+kubectl delete -f https://raw.githubusercontent.com/haproxytech/kubernetes-ingress/v1.5/deploy/haproxy-ingress.yaml
+kubectl apply -f https://raw.githubusercontent.com/haproxytech/kubernetes-ingress/v1.5/deploy/haproxy-ingress.yaml
+kubectl apply -f haproxy-ingress.yaml
+
+git clone https://github.com/Scorpius86/devops-unir.git

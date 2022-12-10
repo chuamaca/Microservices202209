@@ -1,0 +1,26 @@
+<h1 id="tableLabel">Products</h1>
+
+<p>This component demonstrates Products from the server.</p>
+
+<p *ngIf="!products"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+  <thead>
+    <tr>
+      <th>Product Id</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Created</th>
+      <th>Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.ProductId }}</td>
+      <td>{{ product.Description }}</td>
+      <td>{{ product.Price }}</td>
+      <td>{{ product.Created | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+      <td>{{ product.Updated | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+    </tr>
+  </tbody>
+</table>
