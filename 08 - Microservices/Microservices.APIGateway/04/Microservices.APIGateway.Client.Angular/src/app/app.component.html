@@ -1,0 +1,11 @@
+<body>
+  <app-nav-menu></app-nav-menu>  
+  <div class="container">
+    <div style="margin-bottom:24px">
+      <textarea class="token" size="70" [(ngModel)]="token" rows="3"></textarea>
+      <br />
+      <button (click)="btnGenerateTokenOnClick()">Generate Token</button>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</body>

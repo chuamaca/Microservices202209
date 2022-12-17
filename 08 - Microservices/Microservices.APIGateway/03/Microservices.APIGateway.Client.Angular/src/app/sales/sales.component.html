@@ -1,0 +1,27 @@
+<h1 id="tableLabel">Sales</h1>
+
+<p>This component demonstrates Sales from the server.</p>
+
+<p *ngIf="!orders"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="orders">
+  <thead>
+    <tr>
+      <th>Order Id</th>
+      <th>Description</th>
+      <th>Count Products</th>
+      <th>Created</th>
+      <th>Updated</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.OrderId }}</td>
+      <td>{{ order.Description }}</td>
+      <td>{{ order.Items.length }}</td>
+      <td>{{ order.Created  | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+      <td>{{ order.Updated | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="btnLoadSalesOnClick()">Load Sales</button>

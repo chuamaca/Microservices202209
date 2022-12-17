@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
+using Ocelot.Provider.Eureka;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace Microservices.APIGateway.Ocelot.Security
                 };
             });
 
-            services.AddOcelot();
+            services.AddOcelot().AddEureka();
             return services;
         }
     }

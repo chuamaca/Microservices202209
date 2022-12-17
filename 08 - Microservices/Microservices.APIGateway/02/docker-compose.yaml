@@ -1,0 +1,54 @@
+version: '3.4'
+
+services:
+  ########################################################## Client Angular ###############################################################################
+  microservices.apigateway.client.angular:
+    container_name: microservices.apigateway.client.angular
+    image: microservices.apigateway.client.angular
+    build:
+      context: microservices.apigateway.client.angular
+      dockerfile: Dockerfile    
+    ports:
+      - 8081:80      
+    networks:
+      - backend   
+  ########################################################## Products API #################################################################################
+  microservices.apigateway.product.api:
+    container_name: microservices.apigateway.product.api
+    image: microservices.apigateway.product.api
+    build:
+      context: microservices.apigateway.product.api
+      dockerfile: Dockerfile    
+    ports:
+      - 8083:80
+      - 8084:443
+    networks:
+      - backend    
+  ########################################################## Sales API ####################################################################################
+  microservices.apigateway.sale.api:
+    container_name: microservices.apigateway.sale.api
+    image: microservices.apigateway.sale.api
+    build:
+      context: microservices.apigateway.sale.api
+      dockerfile: Dockerfile    
+    ports:
+      - 8085:80
+      - 8086:443
+    networks:
+      - backend
+  ########################################################## API Gateway ####################################################################################
+  microservices.apigateway.ocelot:
+    container_name: microservices.apigateway.ocelot
+    image: microservices.apigateway.ocelot
+    build:
+      context: microservices.apigateway.ocelot
+      dockerfile: Dockerfile    
+    ports:
+      - 8087:80
+      - 8088:443
+    networks:
+      - backend      
+########################################################## Network ##################################################################################
+networks:
+  backend:    
+    driver: bridge

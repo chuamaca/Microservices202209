@@ -26,7 +26,7 @@ namespace Microservices.APIGateway.Auth.API.Controllers
         }
         // GET: api/<Auth>
         [HttpGet]
-        public string Get()
+        public IActionResult Get()
         {
             var jwtSettingsSection = _configuration.GetSection("JWTSettings");
             var jwtSettings = jwtSettingsSection.Get<JWTSettings>();
@@ -48,7 +48,8 @@ namespace Microservices.APIGateway.Auth.API.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            string data = tokenHandler.WriteToken(token);
+            return Ok(new { data = tokenHandler.WriteToken(token) });
         }
 
         // GET api/<Auth>/5

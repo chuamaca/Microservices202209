@@ -1,0 +1,81 @@
+version: '3.4'
+
+services:
+  ########################################################## Client Angular ###############################################################################
+  microservices.apigateway.client.angular:
+    container_name: microservices.apigateway.client.angular
+    image: microservices.apigateway.client.angular
+    build:
+      context: microservices.apigateway.client.angular
+      dockerfile: Dockerfile    
+    ports:
+      - 8081:80      
+    networks:
+      - backend   
+  ########################################################## Products API #################################################################################
+  microservices.apigateway.product.api:
+    #container_name: microservices.apigateway.product.api
+    deploy:
+      replicas: 3
+    image: microservices.apigateway.product.api
+    build:
+      context: microservices.apigateway.product.api
+      dockerfile: Dockerfile    
+    #ports:
+      #- 8083:80
+      #- 8084:443
+    networks:
+      - backend    
+  ########################################################## Sales API ####################################################################################
+  microservices.apigateway.sale.api:
+    #container_name: microservices.apigateway.sale.api
+    deploy:
+      replicas: 3
+    image: microservices.apigateway.sale.api
+    build:
+      context: microservices.apigateway.sale.api
+      dockerfile: Dockerfile    
+    #ports:
+    #  - 8085:80
+    #  - 8086:443
+    networks:
+      - backend
+  ########################################################## API Gateway ####################################################################################
+  microservices.apigateway.ocelot:
+    container_name: microservices.apigateway.ocelot
+    image: microservices.apigateway.ocelot
+    build:
+      context: microservices.apigateway.ocelot
+      dockerfile: Dockerfile    
+    ports:
+      - 8087:80
+      - 8088:443
+    networks:
+      - backend
+  ########################################################## Auth API ####################################################################################
+  microservices.apigateway.auth.api:
+    container_name: microservices.apigateway.auth.api
+    image: microservices.apigateway.auth.api
+    build:
+      context: microservices.apigateway.auth.api
+      dockerfile: Dockerfile    
+    ports:
+      - 8089:80
+      - 8090:443
+    networks:
+      - backend
+  ########################################################## Discovery Server ##################################################################################
+  microservices.apigateway.discoveryservice:
+    container_name: microservices.apigateway.discoveryservice
+    image: microservices.apigateway.discoveryservice
+    build:
+      context: microservices.apigateway.discoveryservice
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - backend
+########################################################## Network ##################################################################################
+networks:
+  backend:    
+    driver: bridge

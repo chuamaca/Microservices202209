@@ -3,11 +3,11 @@
     //Products    
     {
       "DownstreamPathTemplate": "/api/products",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44376
+          "Host": "microservices.apigateway.product.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/products",
@@ -16,18 +16,18 @@
         "POST",
         "PUT",
         "DELETE"
-      ],      
+      ],
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"        
-      }      
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/products/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44376
+          "Host": "microservices.apigateway.product.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/products/{everything}",
@@ -39,17 +39,17 @@
       ],
       "FileCacheOptions": { "TtlSeconds": 15 },
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"        
-      }      
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
+      }
     },
     //Sales
     {
       "DownstreamPathTemplate": "/api/sales",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44323
+          "Host": "microservices.apigateway.sale.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/sales",
@@ -61,16 +61,16 @@
       ],
       "FileCacheOptions": { "TtlSeconds": 15 },
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"        
-      }      
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/sales/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44323
+          "Host": "microservices.apigateway.sale.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/sales/{everything}",
@@ -82,11 +82,11 @@
       ],
       "FileCacheOptions": { "TtlSeconds": 15 },
       "AuthenticationOptions": {
-        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"       
+        "AuthenticationProviderKey": "ApiSecurityAuthenticationScheme"
       }
     }
   ],
   "GlobalConfiguration": {
-    
+
   }
 }

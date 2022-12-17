@@ -3,11 +3,11 @@
     //Products    
     {
       "DownstreamPathTemplate": "/api/products",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44376
+          "Host": "microservices.apigateway.product.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/products",
@@ -20,11 +20,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/products/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44376
+          "Host": "microservices.apigateway.product.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/products/{everything}",
@@ -38,11 +38,11 @@
     //Sales    
     {
       "DownstreamPathTemplate": "/api/sales",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44323
+          "Host": "microservices.apigateway.sale.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/sales",
@@ -55,11 +55,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/sales/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 44323
+          "Host": "microservices.apigateway.sale.api",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/gateway/sales/{everything}",
